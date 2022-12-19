@@ -1,0 +1,17 @@
+body > * {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Poppins', sans-serif;
+	background-color: #272822;
+	padding: 1em 0;
+}
+
+img {
+	max-width: 100%;
+}
+
+#logo img {
+	height: 100px;
+}
