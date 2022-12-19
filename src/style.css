@@ -15,3 +15,7 @@ img {
 #logo img {
 	height: 100px;
 }
+
+.hide {
+	display: none;
+}
