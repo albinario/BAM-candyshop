@@ -1,5 +1,4 @@
 # BAM Candyshop
-![BAM logo](https://github.com/albinario/BAM-candyshop/blob/main/logo.svg)
 <img src="logo.svg" height="100">
 
 ### Flow chart:
