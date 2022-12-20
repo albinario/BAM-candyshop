@@ -24,12 +24,17 @@ shuffleArray(itemsArr)
 const mainEl = document.querySelector('main')!
 
 mainEl.innerHTML = itemsArr.map(item => `
-	<div class="card col-5 p-0 m-2">
-		<img src="${apiUrl}${item.images.large}" class="card-img-top" alt="${item.name}">
-		<div class="card-body">
-			<h5 class="card-title">${item.name}</h5>
-			<p class="card-text">${item.price} sek</p>
-			<a href="#" class="btn btn-primary">Buy</a>
+	<div class="col-6 col-md-4 col-lg-3">
+		<div class="card my-2">
+			<img src="${apiUrl}${item.images.thumbnail}" class="card-img-top" alt="${item.name}">
+			<div class="card-body d-flex flex-column justify-content-between">
+				<h5 class="card-title">${item.name}</h5>
+				<p class="card-text">${item.price} sek</p>
+				<div class="d-flex justify-content-between">
+					<button href="#" class="btn btn-warning"><i class="fa-regular fa-eye"></i> <span class="d-none d-sm-inline">View</span></button>
+					<button href="#" class="btn btn-success"><i class="fa-solid fa-plus"></i> Buy</button>
+				</div>
+			</div>
 		</div>
 	</div>
 `)
