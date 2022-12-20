@@ -1,4 +1,6 @@
-export interface ICandy {
+
+
+export type Candy = {
     id: number,
     name: string,
     description: string,
@@ -13,7 +15,7 @@ export interface ICandy {
     }
 
 
-export let candyArr: ICandy[] = []
+//export let candyArr: ICandy[] = []
 
 export const fetchCandy = async () => {
     const response = await fetch('http://bortakvall.se/api/products')
@@ -21,20 +23,34 @@ export const fetchCandy = async () => {
     throw new Error(`${response.status} ${response.statusText}`)
    }
    
-   return await response.json() as ICandy[]
+   const data = await response.json() //as ICandy[]
+   console.log('data:', data);
    
+   return data
    
 }
 
+// let candyArr = await fetchCandy()
+// console.log('candyArray:', candyArr)
 
+
+
+
+
+
+
+
+
+
+/*
 export const getCandy = async () => {
     candyArr = await fetchCandy()
 
    console.log(candyArr);
     
 }
+*/
 
-getCandy()
 
 
 
