@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import './style.css'
 import { apiUrl, getItems } from './api'
+import { shuffleArray } from './functions'
 
-type Item = {
+export type Item = {
 	id: number
 	name: string
 	description: string
@@ -18,6 +19,7 @@ type Item = {
 
 const items = await getItems()
 const itemsArr: Item[] = items.data
+shuffleArray(itemsArr)
 
 const mainEl = document.querySelector('main')!
 
@@ -26,7 +28,7 @@ mainEl.innerHTML = itemsArr.map(item => `
 		<img src="${apiUrl}${item.images.large}" class="card-img-top" alt="${item.name}">
 		<div class="card-body">
 			<h5 class="card-title">${item.name}</h5>
-			<p class="card-text">${item.price}</p>
+			<p class="card-text">${item.price} sek</p>
 			<a href="#" class="btn btn-primary">Buy</a>
 		</div>
 	</div>
