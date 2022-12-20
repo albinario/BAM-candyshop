@@ -27,7 +27,7 @@ mainEl.innerHTML = itemsArr.map(item => `
 	<div class="col-6 col-md-4 col-lg-3">
 		<div class="card my-2">
 			<img src="${apiUrl}${item.images.thumbnail}" class="card-img-top" alt="${item.name}">
-			<div class="card-body d-flex flex-column justify-content-between">
+			<div class="card-body">
 				<h5 class="card-title">${item.name}</h5>
 				<p class="card-text">${item.price} sek</p>
 				<div class="d-flex justify-content-between">
