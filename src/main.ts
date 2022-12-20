@@ -1,21 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import './style.css'
 import { apiUrl, getItems } from './api'
+import { Item } from './types'
 import { shuffleArray } from './functions'
-
-export type Item = {
-	id: number
-	name: string
-	description: string
-	price: number
-	on_sale: boolean
-	images: {
-		thumbnail: string
-		large: string
-	}
-	stock_status: string
-	stock_quantity: number
-}
 
 const items = await getItems()
 const itemsArr: Item[] = items.data

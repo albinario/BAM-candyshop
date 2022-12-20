@@ -1,4 +1,4 @@
-import { Item } from './main'
+import { Item } from './types'
 
 export const shuffleArray = (array: Item[]) => {
 	for (let i = array.length - 1; i > 0; i--) {
