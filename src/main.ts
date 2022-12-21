@@ -18,8 +18,8 @@ mainEl.innerHTML = itemsArr.map(item => `
 				<p class="card-title">${item.name}</p>
 				<p class="card-text">${item.price} sek</p>
 				<div class="d-flex justify-content-between">
-					<button href="#" class="btn btn-warning"><i class="fa-regular fa-eye"></i> <span class="d-none d-sm-inline">View</span></button>
-					<button href="#" class="btn btn-success"><i class="fa-solid fa-plus"></i> Buy</button>
+					<button href="#" class="btn btn-warning" aria-label="view-item"><i class="fa-regular fa-eye"></i><span class="d-none d-sm-inline"> View</span></button>
+					<button href="#" class="btn btn-success" aria-label="buy-item"><i class="fa-solid fa-plus"></i> Buy</button>
 				</div>
 			</div>
 		</div>
