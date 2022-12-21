@@ -15,7 +15,7 @@ mainEl.innerHTML = candysArr.map(candy => `
 	<div class="col-6 col-md-4 col-lg-3">
 		<div class="card my-2">
 			<img src="${apiUrl}/${candy.images.thumbnail}" class="card-img-top" alt="${candy.name}">
-			<div class="card-body">
+			<div class="card-body text-center">
 				<p class="card-title">${candy.name}</p>
 				<p class="card-text">${candy.price} sek</p>
 				<div class="d-flex justify-content-between">
@@ -26,11 +26,11 @@ mainEl.innerHTML = candysArr.map(candy => `
 		</div>
 	</div>
 
-	<div class="modal fade" id="view-${candy.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="view-${candy.id}" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<p class="modal-title fs-5" id="exampleModalLabel">${candy.name}</p>
+					<p class="modal-title fs-5" id="modal-label">${candy.name}</p>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
