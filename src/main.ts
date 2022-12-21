@@ -28,14 +28,14 @@ mainEl.innerHTML = candysArr.map(candy => `
 `)
 .join('')
 
-const candysInCart: Candy[] = []
-let amountInCart: number = 0
+const storedCandys = localStorage.getItem('in-cart') ?? '[]'
+const candysInCart: Candy[] = JSON.parse(storedCandys)
+inCartEl.innerText = (candysInCart.length) ? String(candysInCart.length) : '';
 
 candysArr.forEach(candy => {
 	document.querySelector(`#buy-${candy.id}`)?.addEventListener('click', () => {
 		candysInCart.push(candy)
-		amountInCart++
-		inCartEl.classList.remove('d-none')
-		inCartEl.innerText = String(amountInCart)
+		localStorage.setItem('in-cart', JSON.stringify(candysInCart))
+		inCartEl.innerText = String(candysInCart.length)
 	})
 })
