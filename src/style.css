@@ -15,10 +15,10 @@ img {
 	height: 100px;
 }
 
-.hide {
-	display: none;
-}
-
 .card {
 	border-color: #f6fd53;
+}
+
+.card-text {
+	font-size: 0.8em;
 }

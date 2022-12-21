@@ -13,11 +13,14 @@
 	<body>
 		<div id="app" class="container">
 			<header class="row align-items-center p-4">
-				<div id="logo" class="col-6"><img src="logo.svg" alt="BAM Candyshop"></div>
+				<div id="logo" class="col-6">
+					<h1 class="d-none">BAM Candyshop</h1>
+					<img src="logo.svg" alt="BAM Candyshop">
+				</div>
 				<div id="cart" class="col-6 text-end">
 					<button type="button" class="btn btn-lg btn-outline-warning">
 						<i class="fa-solid fa-cart-shopping m-1"></i>
-						<span id="in-cart" class="badge bg-danger hide">0</span>
+						<span id="in-cart" class="badge bg-danger d-none">0</span>
 					</button>
 				</div>
 			</header>

@@ -15,7 +15,7 @@ mainEl.innerHTML = itemsArr.map(item => `
 		<div class="card my-2">
 			<img src="${apiUrl}${item.images.thumbnail}" class="card-img-top" alt="${item.name}">
 			<div class="card-body">
-				<h5 class="card-title">${item.name}</h5>
+				<p class="card-title">${item.name}</p>
 				<p class="card-text">${item.price} sek</p>
 				<div class="d-flex justify-content-between">
 					<button href="#" class="btn btn-warning"><i class="fa-regular fa-eye"></i> <span class="d-none d-sm-inline">View</span></button>
