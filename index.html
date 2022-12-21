@@ -18,13 +18,22 @@
 					<img src="logo.svg" alt="BAM Candyshop">
 				</div>
 				<div id="cart" class="col-6 text-end">
-					<button type="button" class="btn btn-lg btn-outline-warning" aria-label="shopping-cart">
+					<button type="button" id="cart" class="btn btn-lg btn-outline-warning" aria-label="shopping-cart">
 						<i class="fa-solid fa-cart-shopping m-1"></i>
 						<span id="in-cart" class="badge bg-danger d-none">0</span>
 					</button>
 				</div>
 			</header>
-			<main class="row"></main>
+			<main class="row">
+			</main>
+			<div id="pop-wrap" class ="popup-wrapper d-none">
+				<div class="popup">
+					<div class="popup-close">X</div>
+					<div class="popup-content">
+						<h2>BUY CANDY!!</h2>
+					</div>	
+				</div>
+			</div>	
 		</div>
 		<script type="module" src="/src/main.ts"></script>
 	</body>
