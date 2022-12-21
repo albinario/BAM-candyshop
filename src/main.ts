@@ -17,7 +17,7 @@ mainEl.innerHTML = candysArr.map(candy => `
 			<img src="${apiUrl}/${candy.images.thumbnail}" class="card-img-top" alt="${candy.name}">
 			<div class="card-body text-center">
 				<p class="card-title">${candy.name}</p>
-				<p class="card-text">${candy.price} sek</p>
+				<p class="card-text"><i class="pig fa-solid fa-piggy-bank"></i> <br> ${candy.price} sek</p>
 				<div class="d-flex justify-content-between">
 					<button class="btn btn-warning" aria-label="view-candy" type="button" data-bs-toggle="modal" data-bs-target="#view-${candy.id}"><i class="fa-regular fa-eye"></i><span class="d-none d-sm-inline"> View</span></button>
 					<button href="#" class="btn btn-success" aria-label="buy-candy"><i class="fa-solid fa-plus"></i> Buy</button>
