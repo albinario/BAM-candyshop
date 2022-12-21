@@ -1,4 +1,4 @@
-export type Item = {
+export type Candy = {
 	id: number
 	name: string
 	description: string

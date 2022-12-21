@@ -1,6 +1,6 @@
-import { Item } from './types'
+import { Candy } from './types'
 
-export const shuffleArray = (array: Item[]) => {
+export const shuffleArray = (array: Candy[]) => {
 	for (let i = array.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1));
 		const temp = array[i];
