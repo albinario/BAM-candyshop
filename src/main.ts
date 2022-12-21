@@ -19,10 +19,19 @@ mainEl.innerHTML = candysArr.map(candy => `
 				<p class="card-text">${candy.price} sek</p>
 				<div class="d-flex justify-content-between">
 					<button href="#" class="btn btn-warning" aria-label="view-candy"><i class="fa-regular fa-eye"></i><span class="d-none d-sm-inline"> View</span></button>
-					<button href="#" class="btn btn-success" aria-label="buy-candy"><i class="fa-solid fa-plus"></i> Buy</button>
+					<button id="buy-${candy.id}" class="btn btn-success" aria-label="buy-candy"><i class="fa-solid fa-plus"></i> Buy</button>
 				</div>
 			</div>
 		</div>
 	</div>
 `)
 .join('')
+
+const candysInCart: Candy[] = []
+
+candysArr.forEach(candy => {
+	document.querySelector(`#buy-${candy.id}`)?.addEventListener('click', () => {
+		candysInCart.push(candy)
+		
+	})
+})
