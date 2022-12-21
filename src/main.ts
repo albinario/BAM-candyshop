@@ -9,6 +9,7 @@ const candysArr: Candy[] = candys.data
 shuffleArray(candysArr)
 
 const mainEl = document.querySelector('main')!
+const inCartEl = document.querySelector('#in-cart') as HTMLElement
 
 mainEl.innerHTML = candysArr.map(candy => `
 	<div class="col-6 col-md-4 col-lg-3">
@@ -28,10 +29,13 @@ mainEl.innerHTML = candysArr.map(candy => `
 .join('')
 
 const candysInCart: Candy[] = []
+let amountInCart: number = 0
 
 candysArr.forEach(candy => {
 	document.querySelector(`#buy-${candy.id}`)?.addEventListener('click', () => {
 		candysInCart.push(candy)
-		
+		amountInCart++
+		inCartEl.classList.remove('d-none')
+		inCartEl.innerText = String(amountInCart)
 	})
 })
