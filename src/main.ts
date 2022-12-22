@@ -3,14 +3,12 @@ import 'bootstrap/dist/js/bootstrap.js'
 import './style.css'
 import { apiUrl, getCandys } from './api'
 import { Candy } from './types'
-import { shuffleArray } from './functions'
+import { shuffleArray, updateCart } from './functions'
+import { mainEl, inCartEl } from './elements'
 
 const candys = await getCandys()
 const candysArr: Candy[] = candys.data
 shuffleArray(candysArr)
-
-const mainEl = document.querySelector('main')!
-const inCartEl = document.querySelector('#in-cart') as HTMLElement
 
 mainEl.innerHTML = candysArr.map(candy => `
 	<div class="col-6 col-md-4 col-lg-3">
@@ -41,7 +39,7 @@ mainEl.innerHTML = candysArr.map(candy => `
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" id="buy-view${candy.id}"  class="btn btn-success" aria-label="buy-candy"><i class="fa-solid fa-plus"></i> Buy</button>
+					<button type="button" id="buy-view-${candy.id}"  class="btn btn-success" aria-label="buy-candy"><i class="fa-solid fa-plus"></i> Buy</button>
 				</div>
 			</div>
 		</div>
@@ -55,17 +53,9 @@ inCartEl.innerText = (candysInCart.length) ? String(candysInCart.length) : ''
 
 candysArr.forEach(candy => {
 	document.querySelector(`#buy-${candy.id}`)?.addEventListener('click', () => {
-		candysInCart.push(candy)
-		localStorage.setItem('in-cart', JSON.stringify(candysInCart))
-		inCartEl.innerText = String(candysInCart.length)
+		updateCart(candysInCart, candy)
 	})
-})
-
-
-candysArr.forEach(candy => {
-	document.querySelector(`#buy-view${candy.id}`)?.addEventListener('click', () => {
-		candysInCart.push(candy)
-		localStorage.setItem('in-cart', JSON.stringify(candysInCart))
-		inCartEl.innerText = String(candysInCart.length)
+	document.querySelector(`#buy-view-${candy.id}`)?.addEventListener('click', () => {
+		updateCart(candysInCart, candy)
 	})
 })
