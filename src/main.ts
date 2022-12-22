@@ -59,3 +59,22 @@ candysArr.forEach(candy => {
 		updateCart(candysInCart, candy)
 	})
 })
+
+const shoppingCart = document.querySelector("#cart")!
+const popup = document.querySelector("#pop-wrap")!
+const popupClose = document.querySelector(".popup-close")!
+const popupContent = document.querySelector(".popup-content") as HTMLElement
+
+shoppingCart.addEventListener("click", () => {
+	popup.classList.remove("d-none")
+})
+
+popupClose.addEventListener("click", () => {
+	popup.classList.add("d-none")
+})
+
+// candysArr.forEach(candy => {
+// 	popupContent.innerHTML += `
+// 	<p>${candy.name}</p>
+// 	`
+// })
