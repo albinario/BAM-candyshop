@@ -31,11 +31,12 @@ img {
 	color:rgb(254, 151, 168)
 }
 
-/* .modal-header {
-	margin: auto;
-} */
+.modal-header {
+	font-weight: 600;
+}
 
 .modal-body p:first-of-type{
 	text-align: center;
 	font-weight: 600;
+	margin: 10px;
 }
