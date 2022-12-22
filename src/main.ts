@@ -48,9 +48,11 @@ mainEl.innerHTML = candysArr.map(candy => `
 `)
 .join('')
 
+
 const shoppingCart = document.querySelector("#cart")!
 const popup = document.querySelector("#pop-wrap")!
 const popupClose = document.querySelector(".popup-close")!
+const popupContent = document.querySelector(".popup-content") as HTMLElement
 
 shoppingCart.addEventListener("click", () => {
 	popup.classList.remove("d-none")
@@ -58,4 +60,10 @@ shoppingCart.addEventListener("click", () => {
 
 popupClose.addEventListener("click", () => {
 	popup.classList.add("d-none")
+})
+
+candysArr.forEach(candy => {
+	popupContent.innerHTML += `
+	<p>${candy.name}</p>
+	`
 })
