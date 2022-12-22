@@ -10,6 +10,7 @@ const candysArr: Candy[] = candys.data
 shuffleArray(candysArr)
 
 const mainEl = document.querySelector('main')!
+const inCartEl = document.querySelector('#in-cart') as HTMLElement
 
 mainEl.innerHTML = candysArr.map(candy => `
 	<div class="col-6 col-md-4 col-lg-3">
@@ -20,7 +21,7 @@ mainEl.innerHTML = candysArr.map(candy => `
 				<p class="card-text"><i class="fa-solid fa-piggy-bank"></i> ${candy.price} sek</p>
 				<div class="d-flex justify-content-between">
 					<button class="btn btn-warning" aria-label="view-candy" type="button" data-bs-toggle="modal" data-bs-target="#view-${candy.id}"><i class="fa-regular fa-eye"></i><span class="d-none d-sm-inline"> View</span></button>
-					<button href="#" class="btn btn-success" aria-label="buy-candy"><i class="fa-solid fa-plus"></i> Buy</button>
+					<button id="buy-${candy.id}" class="btn btn-success" aria-label="buy-candy"><i class="fa-solid fa-plus"></i> Buy</button>
 				</div>
 			</div>
 		</div>
@@ -47,3 +48,15 @@ mainEl.innerHTML = candysArr.map(candy => `
 	</div>
 `)
 .join('')
+
+const storedCandys = localStorage.getItem('in-cart') ?? '[]'
+const candysInCart: Candy[] = JSON.parse(storedCandys)
+inCartEl.innerText = (candysInCart.length) ? String(candysInCart.length) : ''
+
+candysArr.forEach(candy => {
+	document.querySelector(`#buy-${candy.id}`)?.addEventListener('click', () => {
+		candysInCart.push(candy)
+		localStorage.setItem('in-cart', JSON.stringify(candysInCart))
+		inCartEl.innerText = String(candysInCart.length)
+	})
+})
