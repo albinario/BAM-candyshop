@@ -73,8 +73,8 @@ popupClose.addEventListener("click", () => {
 	popup.classList.add("d-none")
 })
 
-// candysArr.forEach(candy => {
-// 	popupContent.innerHTML += `
-// 	<p>${candy.name}</p>
-// 	`
-// })
+candysArr.forEach(candy => {
+	popupContent.innerHTML += `
+	<p>${candy.name}</p>
+	`
+})
