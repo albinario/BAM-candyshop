@@ -37,11 +37,11 @@ mainEl.innerHTML = candysArr.map(candy => `
 				<div class="modal-body">
 					<img src="${apiUrl}/${candy.images.large}" alt="${candy.name}">
 					${candy.description}
-					<p>${candy.price} sek</p>
+					<p class="text-end"><i class="fa-solid fa-piggy-bank"></i> ${candy.price} sek</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-success" aria-label="buy-candy"><i class="fa-solid fa-plus"></i> Buy</button>
+					<button type="button" id="buy-view${candy.id}"  class="btn btn-success" aria-label="buy-candy"><i class="fa-solid fa-plus"></i> Buy</button>
 				</div>
 			</div>
 		</div>
@@ -55,6 +55,15 @@ inCartEl.innerText = (candysInCart.length) ? String(candysInCart.length) : ''
 
 candysArr.forEach(candy => {
 	document.querySelector(`#buy-${candy.id}`)?.addEventListener('click', () => {
+		candysInCart.push(candy)
+		localStorage.setItem('in-cart', JSON.stringify(candysInCart))
+		inCartEl.innerText = String(candysInCart.length)
+	})
+})
+
+
+candysArr.forEach(candy => {
+	document.querySelector(`#buy-view${candy.id}`)?.addEventListener('click', () => {
 		candysInCart.push(candy)
 		localStorage.setItem('in-cart', JSON.stringify(candysInCart))
 		inCartEl.innerText = String(candysInCart.length)
