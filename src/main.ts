@@ -35,7 +35,7 @@ mainEl.innerHTML = candysArr.map(candy => `
 				<div class="modal-body">
 					<img src="${apiUrl}/${candy.images.large}" alt="${candy.name}">
 					${candy.description}
-					<p class="text-end"><i class="fa-solid fa-piggy-bank"></i> ${candy.price} sek</p>
+					<p class="fw-bold"><i class="fa-solid fa-piggy-bank"></i> ${candy.price} sek</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

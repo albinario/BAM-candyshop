@@ -36,7 +36,5 @@ img {
 }
 
 .modal-body p:first-of-type{
-	text-align: center;
 	font-weight: 600;
-	margin: 10px;
 }
