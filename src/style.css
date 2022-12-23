@@ -51,22 +51,25 @@ img {
 .popup {
 	text-align: center;
 	width: 100%;
-	max-width: 400px;
+	max-width: 80%;
 	margin: 10% auto;
 	padding: 20px;
-	background: white;
+	background: rgb(34, 37, 41);
 	position: relative;
 }
 
 .popup-close {
 	position: absolute;
+	color: white;
 	top: 5px;
 	right: 8px;
 	cursor: pointer;
+	font-size: 1.5em;
+	padding: 5px;
 }
 
 .cart-img {
-	max-width: 20%;
-	max-height: 20%;
-	border: 1px solid #f6fd53;
+	max-width: 10%;
+	max-height: 10%;
 }
+
