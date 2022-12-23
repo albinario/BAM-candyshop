@@ -54,18 +54,20 @@ inCartEl.innerText = (candysInCart.length) ? String(candysInCart.length) : ''
 candysArr.forEach(candy => {
 	document.querySelector(`#buy-${candy.id}`)?.addEventListener('click', () => {
 		updateCart(candysInCart, candy)
-	})
+		location.reload()
+})
 	document.querySelector(`#buy-view-${candy.id}`)?.addEventListener('click', () => {
 		updateCart(candysInCart, candy)
+		location.reload()
 	})
 })
 
-const shoppingCart = document.querySelector("#cart")!
+const shoppingCartBtn = document.querySelector("#cart")!
 const popup = document.querySelector("#pop-wrap")!
 const popupClose = document.querySelector(".popup-close")!
 const popupContent = document.querySelector(".popup-content") as HTMLElement
 
-shoppingCart.addEventListener("click", () => {
+shoppingCartBtn.addEventListener("click", () => {
 	popup.classList.remove("d-none")
 })
 
@@ -73,8 +75,16 @@ popupClose.addEventListener("click", () => {
 	popup.classList.add("d-none")
 })
 
-candysArr.forEach(candy => {
-	popupContent.innerHTML += `
-	<p>${candy.name}</p>
-	`
+
+candysInCart.forEach(candy => {
+		popupContent.innerHTML += `
+		<div class="d-flex justify-content-between align-items-center my-2">
+			<img src="${apiUrl}/${candy.images.thumbnail}" class="card-img-top cart-img" alt="${candy.name}">
+			<p>${candy.name}</p>
+			<p class="text-end">${candy.price} sek</p>
+		</div>	
+			`
+		
 })
+
+

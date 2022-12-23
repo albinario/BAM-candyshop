@@ -64,3 +64,9 @@ img {
 	right: 8px;
 	cursor: pointer;
 }
+
+.cart-img {
+	max-width: 20%;
+	max-height: 20%;
+	border: 1px solid #f6fd53;
+}
