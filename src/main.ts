@@ -67,14 +67,21 @@ const popupContent = document.querySelector(".popup-content") as HTMLElement
 
 shoppingCart.addEventListener("click", () => {
 	popup.classList.remove("d-none")
+	
 })
 
 popupClose.addEventListener("click", () => {
 	popup.classList.add("d-none")
 })
 
-candysArr.forEach(candy => {
+
+candysInCart.forEach(candy => {
+	
 	popupContent.innerHTML += `
 	<p>${candy.name}</p>
+	<img src="${apiUrl}/${candy.images.thumbnail}"><img>
 	`
 })
+
+
+
