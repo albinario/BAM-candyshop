@@ -81,6 +81,15 @@ img {
 	color: white;
 }
 
+.sold-out-parent {
+	position: relative;
+}
+
+.sold-out {
+	position: absolute;
+}
+
+
 
 
 

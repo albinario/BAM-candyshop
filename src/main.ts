@@ -10,6 +10,8 @@ const candys = await getCandys()
 const candysArr: Candy[] = candys.data
 candysArr.sort((a, b) => a.name.localeCompare(b.name))
 
+// candysArr.forEach(candy => )
+
 //filter
 const filterCandy = candysArr.filter(candy => candy.stock_quantity > 0)
 // const outOfStock = candysArr.filter(candy => candy.stock_status === 'outofstock')
@@ -22,8 +24,8 @@ candyCountEl.innerHTML = `<p>${filterCandy.length} available products in stock o
 mainEl.innerHTML = candysArr.map(candy => `
 	<div class="col-6 col-md-4 col-lg-3">
 		<div class="card my-2">
-		<p class="p-1">${!candy.stock_quantity ? '<span class="badge bg-danger">Sold out</span>' : ''}</p>
-			<img src="${apiUrl}/${candy.images.thumbnail}" class="card-img-top" alt="${candy.name}">
+			<img src="${apiUrl}/${candy.images.thumbnail}" class="card-img-top sold-out-parent" alt="${candy.name}">
+			<p class="sold-out p-1">${!candy.stock_quantity ? '<span class="badge bg-danger">Sold out</span>' : ''}</p>
 			<div class="card-body text-center">
 				<p class="card-title">${candy.name}</p>
 				<p class="card-text"><i class="fa-solid fa-piggy-bank"></i> ${candy.price} sek</p>
@@ -42,7 +44,8 @@ mainEl.innerHTML = candysArr.map(candy => `
 					<p class="modal-title fs-5" id="modal-label">${candy.name}</p>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body sold-out-parent">
+				<p class="sold-out p-1">${!candy.stock_quantity ? '<span class="badge bg-danger">Sold out</span>' : ''}</p>
 					<img src="${apiUrl}/${candy.images.large}" alt="${candy.name}">
 					${candy.description}
 					<p class="fw-bold"><i class="fa-solid fa-piggy-bank"></i> ${candy.price} sek</p>
@@ -56,6 +59,8 @@ mainEl.innerHTML = candysArr.map(candy => `
 	</div>
 `)
 .join('')
+
+
 
 const storedCandys = localStorage.getItem('in-cart') ?? '[]'
 const candysInCart: Candy[] = JSON.parse(storedCandys)
