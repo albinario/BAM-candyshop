@@ -70,5 +70,3 @@ cartBtnEl.addEventListener("click", () => {
 popupCloseEl.addEventListener("click", () => {
 	popupEl.classList.add("d-none")
 })
-
-
