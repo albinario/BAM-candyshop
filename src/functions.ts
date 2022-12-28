@@ -20,12 +20,13 @@ export const updateCart = (candysInCart: Candy[], candy: Candy) => {
 	tableContentEl.innerHTML += 
 `
 			<tr>
-			<th scope="row"><img src="${apiUrl}/${candy.images.thumbnail}" class="card-img-top cart-img" alt="${candy.name}">
-			<span>${candy.name}</span></th>
+			<td><img src="${apiUrl}/${candy.images.thumbnail}" class="" alt="${candy.name}"></td>
+			<td>${candy.name}</td>
 			<td>
 				<span class="badge bg-danger">-</span>
 				<span class="badge bg-warning">0</span>
-				<span class="badge bg-success">+</span></td>
+				<span class="badge bg-success">+</span>
+			</td>
 			<td>${candy.price} sek</td>
 			<td>${candy.price} sek</td>
 			</tr>	
