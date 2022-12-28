@@ -39,7 +39,7 @@ img {
 	font-weight: 600;
 }
 
-.popup-wrapper {
+#popup {
 	background: rgba(0,0,0,0.9);
 	position: fixed;
 	top: 0;
@@ -48,7 +48,7 @@ img {
 	height: 100%;
 }
 
-.popup {
+.popup-content {
 	text-align: center;
 	width: 100%;
 	max-width: 80%;

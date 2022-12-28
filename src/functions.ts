@@ -1,5 +1,5 @@
 import { Candy } from './types'
-import { inCartEl, tableContentEl  } from './elements'
+import { inCartEls, tableContentEl  } from './elements'
 import { apiUrl } from './api'
 
 
@@ -16,7 +16,7 @@ export const shuffleArray = (array: Candy[]) => {
 export const updateCart = (candysInCart: Candy[], candy: Candy) => {
 	candysInCart.push(candy)
 	localStorage.setItem('in-cart', JSON.stringify(candysInCart))
-	inCartEl.innerText = String(candysInCart.length)
+	inCartEls.forEach(el => el.innerHTML = String(candysInCart.length))
 	tableContentEl.innerHTML += 
 `
 			<tr>

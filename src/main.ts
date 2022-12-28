@@ -4,7 +4,7 @@ import './style.css'
 import { apiUrl, getCandys } from './api'
 import { Candy } from './types'
 import { shuffleArray, updateCart } from './functions'
-import { mainEl, inCartEl, popupCloseEl, popupEl, shoppingCartBtnEl } from './elements'
+import { mainEl, inCartEls, popupCloseEl, popupEl, cartBtnEl } from './elements'
 
 const candys = await getCandys()
 const candysArr: Candy[] = candys.data
@@ -49,21 +49,20 @@ mainEl.innerHTML = candysArr.map(candy => `
 
 const storedCandys = localStorage.getItem('in-cart') ?? '[]'
 const candysInCart: Candy[] = JSON.parse(storedCandys)
-inCartEl.innerText = (candysInCart.length) ? String(candysInCart.length) : ''
+if (candysInCart.length){
+	inCartEls.forEach(el => el.innerHTML = String(candysInCart.length))
+}
 
 candysArr.forEach(candy => {
 	document.querySelector(`#buy-${candy.id}`)?.addEventListener('click', () => {
 		updateCart(candysInCart, candy)
-		//location.reload()
-})
+	})
 	document.querySelector(`#buy-view-${candy.id}`)?.addEventListener('click', () => {
 		updateCart(candysInCart, candy)
-		//location.reload()
 	})
 })
 
-
-shoppingCartBtnEl.addEventListener("click", () => {
+cartBtnEl.addEventListener("click", () => {
 	popupEl.classList.remove("d-none")
 })
 
@@ -71,16 +70,4 @@ popupCloseEl.addEventListener("click", () => {
 	popupEl.classList.add("d-none")
 })
 
-/*
-candysInCart.forEach(candy => {
-		popupContentEl.innerHTML += `
-		<div class="d-flex justify-content-between align-items-center my-2">
-			<img src="${apiUrl}/${candy.images.thumbnail}" class="card-img-top cart-img" alt="${candy.name}">
-			<p>${candy.name}</p>
-			<p class="text-end">${candy.price} sek</p>
-		</div>	
-			`
-		
-})
-*/
 
