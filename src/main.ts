@@ -3,12 +3,17 @@ import 'bootstrap/dist/js/bootstrap.js'
 import './style.css'
 import { apiUrl, getCandys } from './api'
 import { Candy } from './types'
-import { shuffleArray, updateCart, renderCandyInCart } from './functions'
-import { mainEl, inCartEls, popupCloseEl, popupEl, cartBtnEl } from './elements'
+import { updateCart, renderCandyInCart } from './functions'
+import { mainEl, inCartEls, popupCloseEl, popupEl, cartBtnEl, candyCountEl } from './elements'
 
 const candys = await getCandys()
 const candysArr: Candy[] = candys.data
-shuffleArray(candysArr)
+candysArr.sort((a, b) => a.name.localeCompare(b.name))
+
+//filter
+const filterCandy = candysArr.filter(candy => candy.stock_quantity > 0)
+	
+candyCountEl.innerHTML = `<p>${filterCandy.length} available products in stock out of ${candysArr.length} products in a dream world</p>`
 
 mainEl.innerHTML = candysArr.map(candy => `
 	<div class="col-6 col-md-4 col-lg-3">
@@ -49,6 +54,7 @@ mainEl.innerHTML = candysArr.map(candy => `
 
 const storedCandys = localStorage.getItem('in-cart') ?? '[]'
 const candysInCart: Candy[] = JSON.parse(storedCandys)
+candysInCart.sort((a, b) => a.name.localeCompare(b.name))
 if (candysInCart.length){
 	inCartEls.forEach(el => el.innerHTML = String(candysInCart.length))
 	candysInCart.forEach(candy => renderCandyInCart(candy))
