@@ -4,7 +4,7 @@ import './style.css'
 import { apiUrl, getCandys } from './api'
 import { Candy } from './types'
 import { shuffleArray, updateCart, renderCandyInCart } from './functions'
-import { mainEl, inCartEls, popupCloseEl, popupEl, cartBtnEl } from './elements'
+import { headerEl, mainEl, cartBtnEl, inCartEls, popupCloseEl, popupEl } from './elements'
 
 const candys = await getCandys()
 const candysArr: Candy[] = candys.data
@@ -24,7 +24,6 @@ mainEl.innerHTML = candysArr.map(candy => `
 			</div>
 		</div>
 	</div>
-
 	<div class="modal fade" id="view-${candy.id}" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -63,10 +62,12 @@ candysArr.forEach(candy => {
 	})
 })
 
-cartBtnEl.addEventListener("click", () => {
-	popupEl.classList.remove("d-none")
+cartBtnEl.addEventListener('click', () => {
+	popupEl.classList.remove('d-none')
+	headerEl.classList.remove('sticky-top')
 })
 
-popupCloseEl.addEventListener("click", () => {
-	popupEl.classList.add("d-none")
+popupCloseEl.addEventListener('click', () => {
+	popupEl.classList.add('d-none')
+	headerEl.classList.add('sticky-top')
 })
