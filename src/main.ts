@@ -12,12 +12,17 @@ candysArr.sort((a, b) => a.name.localeCompare(b.name))
 
 //filter
 const filterCandy = candysArr.filter(candy => candy.stock_quantity > 0)
+// const outOfStock = candysArr.filter(candy => candy.stock_status === 'outofstock')
+// console.log('out of stock', outOfStock);
 	
 candyCountEl.innerHTML = `<p>${filterCandy.length} available products in stock out of ${candysArr.length} products in a dream world</p>`
+
+
 
 mainEl.innerHTML = candysArr.map(candy => `
 	<div class="col-6 col-md-4 col-lg-3">
 		<div class="card my-2">
+		<p class="p-1">${!candy.stock_quantity ? '<span class="badge bg-danger">Sold out</span>' : ''}</p>
 			<img src="${apiUrl}/${candy.images.thumbnail}" class="card-img-top" alt="${candy.name}">
 			<div class="card-body text-center">
 				<p class="card-title">${candy.name}</p>
