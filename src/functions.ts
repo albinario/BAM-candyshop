@@ -21,7 +21,7 @@ export const updateCart = (candysInCart: Candy[], candy: Candy) => {
 export const renderCandyInCart = (candy: Candy) => {
 	tableContentEl.innerHTML += `
 		<tr scope="row">
-			<td><img src="${apiUrl}/${candy.images.thumbnail}" class="card" alt="${candy.name}"></td>
+			<td><img src="${apiUrl}/${candy.images.thumbnail}" class="card d-none d-sm-inline" alt="${candy.name}"></td>
 			<td>${candy.name}</td>
 			<td class="text-nowrap">
 				<span class="badge bg-danger">-</span>
