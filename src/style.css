@@ -42,3 +42,42 @@ img {
 .modal-body p:first-of-type{
 	font-weight: 600;
 }
+
+#popup {
+	background: rgba(0,0,0,0.9);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+.popup-content {
+	width: 100%;
+	max-width: 80%;
+	margin: 10% auto;
+	padding: 20px;
+	background: rgb(34, 37, 41);
+	position: relative;
+}
+
+.popup-close {
+	position: absolute;
+	color: white;
+	top: 5px;
+	right: 8px;
+	cursor: pointer;
+	font-size: 1.5em;
+	padding: 5px;
+}
+
+.popup-content img {
+	max-height: 70px;
+	/* max-width: 75px;  */
+}
+
+
+
+
+
