@@ -1,5 +1,5 @@
 import { Candy, CandyInCart } from './types'
-import { inCartEls, tableContentEl } from './elements'
+import { scoopsInCartEls, tableContentEl } from './elements'
 import { apiUrl } from './api'
 
 export const shuffleArray = (array: Candy[]) => {
@@ -21,7 +21,7 @@ export const addToCart = (candysInCart: CandyInCart[], candy: Candy) => {
 		renderCandyInCart(newCandy)
 	}
 	localStorage.setItem('in-cart', JSON.stringify(candysInCart))
-	inCartEls.forEach(el => el.innerHTML = String(countScoops(candysInCart)))
+	updateInCartEls(candysInCart)
 }
 
 export const renderCandyInCart = (candy: CandyInCart) => {
@@ -47,6 +47,10 @@ const scoop = (candy: CandyInCart, amount: number) => {
 	document.querySelector(`#total-${candy.candy.id}`)!.innerHTML = String(total)
 }
 
-export const countScoops = (candysInCart: CandyInCart[]) => {
+const countScoops = (candysInCart: CandyInCart[]) => {
 	return candysInCart.reduce((sum, a) => sum + a.amount, 0)
+}
+
+export const updateInCartEls = (candysInCart: CandyInCart[]) => {
+	scoopsInCartEls.forEach(el => el.innerHTML = String(countScoops(candysInCart)))
 }
