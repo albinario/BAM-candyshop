@@ -21,7 +21,7 @@ export const addToCart = (candysInCart: CandyInCart[], candy: Candy) => {
 		renderCandyInCart(newCandy)
 	}
 	localStorage.setItem('in-cart', JSON.stringify(candysInCart))
-	inCartEls.forEach(el => el.innerHTML = String(candysInCart.length))
+	inCartEls.forEach(el => el.innerHTML = String(countScoops(candysInCart)))
 }
 
 export const renderCandyInCart = (candy: CandyInCart) => {
@@ -45,4 +45,8 @@ const scoop = (candy: CandyInCart, amount: number) => {
 	const total = candy.candy.price * candy.amount
 	document.querySelector(`#amount-${candy.candy.id}`)!.innerHTML = String(candy.amount)
 	document.querySelector(`#total-${candy.candy.id}`)!.innerHTML = String(total)
+}
+
+export const countScoops = (candysInCart: CandyInCart[]) => {
+	return candysInCart.reduce((sum, a) => sum + a.amount, 0)
 }

@@ -3,7 +3,7 @@ import 'bootstrap/dist/js/bootstrap.js'
 import './style.css'
 import { apiUrl, getCandys } from './api'
 import { Candy, CandyInCart } from './types'
-import { shuffleArray, addToCart, renderCandyInCart } from './functions'
+import { shuffleArray, addToCart, renderCandyInCart, countScoops } from './functions'
 import { headerEl, mainEl, cartBtnEl, inCartEls, popupCloseEl, popupEl } from './elements'
 
 const candys = await getCandys()
@@ -49,7 +49,7 @@ mainEl.innerHTML = candysArr.map(candy => `
 const storedCandys = localStorage.getItem('in-cart') ?? '[]'
 const candysInCart: CandyInCart[] = JSON.parse(storedCandys)
 if (candysInCart.length){
-	inCartEls.forEach(el => el.innerHTML = String(candysInCart.length))
+	inCartEls.forEach(el => el.innerHTML = String(countScoops(candysInCart)))
 	candysInCart.forEach(candy => renderCandyInCart(candy))
 }
 
