@@ -25,13 +25,13 @@ mainEl.innerHTML = candysArr.map(candy => `
 	<div class="col-6 col-md-4 col-lg-3">
 		<div class="card my-2">
 			<img src="${apiUrl}/${candy.images.thumbnail}" class="card-img-top sold-out-parent" alt="${candy.name}">
-			<p class="sold-out p-1">${!candy.stock_quantity ? '<span class="badge bg-danger">Sold out</span>' : ''}</p>
+			<p class="sold-out p-1">${!candy.stock_quantity ? '<span class="badge bg-danger">Sold out</span>'  : ''}</p>
 			<div class="card-body text-center">
 				<p class="card-title">${candy.name}</p>
 				<p class="card-text"><i class="fa-solid fa-piggy-bank"></i> ${candy.price} sek</p>
 				<div class="d-flex justify-content-between">
 					<button class="btn btn-warning" aria-label="view-candy" type="button" data-bs-toggle="modal" data-bs-target="#view-${candy.id}"><i class="fa-regular fa-eye"></i><span class="d-none d-sm-inline"> View</span></button>
-					<button id="buy-${candy.id}" class="buy-btn btn btn-success" aria-label="buy-candy"><i class="fa-solid fa-plus"></i> Buy</button>
+					<span> ${candy.stock_quantity ? `<button id="buy-${candy.id}" class="buy-btn btn btn-success" aria-label="buy-candy"> <i class="fa-solid fa-plus"></i> Buy</button>` : `<button id="buy-${candy.id}" class="buy-btn btn btn-success" aria-label="buy-candy" disabled> <i class="fa-solid fa-plus"></i> Buy</button>`} </span>
 				</div>
 			</div>
 		</div>
@@ -52,7 +52,7 @@ mainEl.innerHTML = candysArr.map(candy => `
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" id="buy-view-${candy.id}"  class="btn btn-success" aria-label="buy-candy"><i class="fa-solid fa-plus"></i> Buy</button>
+					<span>${candy.stock_quantity ? `<button type="button" id="buy-view-${candy.id}"  class="btn btn-success" aria-label="buy-candy"><i class="fa-solid fa-plus"></i> Buy</button>` : `<button type="button" id="buy-view-${candy.id}"  class="btn btn-success" disabled aria-label="buy-candy"><i class="fa-solid fa-plus"></i> Buy</button>`} </span>
 				</div>
 			</div>
 		</div>
@@ -60,8 +60,6 @@ mainEl.innerHTML = candysArr.map(candy => `
 `
 )
 .join('')
-
-
 
 const storedCandys = localStorage.getItem('in-cart') ?? '[]'
 const candysInCart: Candy[] = JSON.parse(storedCandys)
