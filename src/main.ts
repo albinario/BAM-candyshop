@@ -2,8 +2,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import './style.css'
 import { apiUrl, getCandys } from './api'
-import { Candy } from './types'
-import { shuffleArray, updateCart, renderCandyInCart } from './functions'
+import { Candy, CandyInCart } from './types'
+import { shuffleArray, addToCart, renderCandyInCart } from './functions'
 import { headerEl, mainEl, cartBtnEl, inCartEls, popupCloseEl, popupEl } from './elements'
 
 const candys = await getCandys()
@@ -47,7 +47,7 @@ mainEl.innerHTML = candysArr.map(candy => `
 .join('')
 
 const storedCandys = localStorage.getItem('in-cart') ?? '[]'
-const candysInCart: Candy[] = JSON.parse(storedCandys)
+const candysInCart: CandyInCart[] = JSON.parse(storedCandys)
 if (candysInCart.length){
 	inCartEls.forEach(el => el.innerHTML = String(candysInCart.length))
 	candysInCart.forEach(candy => renderCandyInCart(candy))
@@ -55,10 +55,10 @@ if (candysInCart.length){
 
 candysArr.forEach(candy => {
 	document.querySelector(`#buy-${candy.id}`)?.addEventListener('click', () => {
-		updateCart(candysInCart, candy)
+		addToCart(candysInCart, candy)
 	})
 	document.querySelector(`#buy-view-${candy.id}`)?.addEventListener('click', () => {
-		updateCart(candysInCart, candy)
+		addToCart(candysInCart, candy)
 	})
 })
 
