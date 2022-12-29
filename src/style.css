@@ -84,7 +84,8 @@ img {
 	cursor: pointer;
 }
 
-.popup-content .bg-warning {
+/* bg-warning */
+.popup-content .bg-yellow {
 	font-size: 1.1em;
 	color: #000;
 }
@@ -99,4 +100,27 @@ img {
 
 .sold-out {
 	position: absolute;
+}
+
+.submit-button {
+	background-color: #f6fd53;
+	color: black;
+	
+}
+
+.submit-button:hover {
+	background-color: green;
+}
+
+.form-header {
+	color: white;
+	margin-bottom: 0px;
+}
+
+.form-check-label {
+	color: white;
+}
+
+.badge {
+	background-color: #f6fd53;
 }

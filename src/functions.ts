@@ -16,7 +16,7 @@ export const renderCandyInCart = (candy: Candy) => {
 			<td>${candy.name}</td>
 			<td class="text-nowrap">
 				<span class="badge bg-danger">-</span>
-				<span class="badge bg-warning">1</span>
+				<span class="badge bg-yellow">1</span>
 				<span class="badge bg-success">+</span>
 			</td>
 			<td class="text-center text-nowrap">${candy.price} kr</td>
