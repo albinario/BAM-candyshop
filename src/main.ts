@@ -48,7 +48,7 @@ mainEl.innerHTML = candysArr.map(candy => `
 
 const storedCandys = localStorage.getItem('in-cart') ?? '[]'
 const candysInCart: CandyInCart[] = JSON.parse(storedCandys)
-if (candysInCart.length){
+if (candysInCart.length) {
 	updateInCartEls(candysInCart)
 	candysInCart.forEach(candy => renderCandyInCart(candy))
 }

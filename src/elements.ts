@@ -6,3 +6,4 @@ export const candysInCartEl = document.querySelector('.candys-in-cart')!
 export const popupEl = document.querySelector('#popup')!
 export const popupCloseEl = document.querySelector('.popup-close')!
 export const tableContentEl = document.querySelector('.table-content')!
+export const totalPriceEl = document.querySelector('#total-price')!

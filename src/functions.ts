@@ -1,5 +1,5 @@
 import { Candy, CandyInCart } from './types'
-import { candysInCartEl, scoopsInCartEls, tableContentEl } from './elements'
+import { candysInCartEl, scoopsInCartEls, tableContentEl, totalPriceEl } from './elements'
 import { apiUrl } from './api'
 
 export const shuffleArray = (array: Candy[]) => {
@@ -29,15 +29,21 @@ export const renderCandyInCart = (candy: CandyInCart) => {
 		<tr scope="row">
 			<td><img src="${apiUrl}/${candy.candy.images.thumbnail}" class="card d-none d-sm-inline" alt="${candy.candy.name}"></td>
 			<td>${candy.candy.name}</td>
-			<td class="text-nowrap">
-				<span class="badge bg-danger">-</span>
+			<td class="text-center text-nowrap">
+				<span id="remove-${candy.candy.id}" class="badge bg-danger">-</span>
 				<span id="amount-${candy.candy.id}" class="badge bg-warning">${candy.amount}</span>
-				<span class="badge bg-success">+</span>
+				<span id="add-${candy.candy.id}" class="badge bg-success">+</span>
 			</td>
 			<td class="text-center text-nowrap">${candy.candy.price} kr</td>
 			<td id="total-${candy.candy.id}" class="text-center text-nowrap">${candy.candy.price * candy.amount} kr</td>
 		</tr>
 	`
+	document.querySelector(`#add-${candy.candy.id}`)?.addEventListener('click', () => {
+		scoop(candy, 1)
+	})
+	document.querySelector(`#remove-${candy.candy.id}`)?.addEventListener('click', () => {
+		scoop(candy, -1)
+	})
 }
 
 const scoop = (candy: CandyInCart, amount: number) => {
@@ -51,7 +57,16 @@ const countScoops = (candysInCart: CandyInCart[]) => {
 	return candysInCart.reduce((sum, a) => sum + a.amount, 0)
 }
 
+const countTotalPrice = (candysInCart: CandyInCart[]) => {
+	let totalPrice = 0
+	candysInCart.forEach(candy => {
+		totalPrice += candy.candy.price * candy.amount
+	})
+	return totalPrice
+}
+
 export const updateInCartEls = (candysInCart: CandyInCart[]) => {
 	scoopsInCartEls.forEach(el => el.innerHTML = String(countScoops(candysInCart)))
 	candysInCartEl.innerHTML = String(candysInCart.length)
+	totalPriceEl.innerHTML = String(countTotalPrice(candysInCart))
 }
