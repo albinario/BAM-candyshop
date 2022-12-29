@@ -1,5 +1,5 @@
 import { Candy, CandyInCart } from './types'
-import { scoopsInCartEls, tableContentEl } from './elements'
+import { candysInCartEl, scoopsInCartEls, tableContentEl } from './elements'
 import { apiUrl } from './api'
 
 export const shuffleArray = (array: Candy[]) => {
@@ -53,4 +53,5 @@ const countScoops = (candysInCart: CandyInCart[]) => {
 
 export const updateInCartEls = (candysInCart: CandyInCart[]) => {
 	scoopsInCartEls.forEach(el => el.innerHTML = String(countScoops(candysInCart)))
+	candysInCartEl.innerHTML = String(candysInCart.length)
 }
