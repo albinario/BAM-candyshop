@@ -80,11 +80,23 @@ img {
 	max-height: 60px;
 }
 
-.popup-content  .bg-danger, .popup-content  .bg-success {
+.popup-content .bg-danger, .popup-content .bg-success {
 	cursor: pointer;
 }
 
-.popup-content  .bg-warning {
+.popup-content .bg-warning {
 	font-size: 1.1em;
 	color: #000;
+}
+
+.candy-count {
+	color: white;
+}
+
+.sold-out-parent {
+	position: relative;
+}
+
+.sold-out {
+	position: absolute;
 }
