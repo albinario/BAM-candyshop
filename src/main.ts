@@ -82,6 +82,10 @@ popupCloseEl.addEventListener('click', () => {
 
 document.querySelector('#place-order')?.addEventListener('submit', async e => {
 	e.preventDefault()
+
+	
+	
+	
 	const neworder: IOrder = {
 		"customer_first_name": firstNameEl.value,
 		"customer_last_name": lastNameEl.value, 

@@ -24,7 +24,6 @@ export const createOrder = async (newOrder: IOrder) => {
   
 	console.log(res);
 	
-	
 	if (res.ok) {
 		orderMsgEl.innerHTML += `
 		<p class="alert alert-danger mt-3">Something went wrong, unfortunately</p>`
