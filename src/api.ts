@@ -25,9 +25,9 @@ export const createOrder = async (newOrder: IOrder) => {
 	console.log(res);
 	
 	
-	if (!res.ok) {
+	if (res.ok) {
 		orderMsgEl.innerHTML += `
-		<p class="alert alert-danger mt-3 text-black">Something went wrong, unfortunately</p>`
+		<p class="alert alert-danger mt-3">Something went wrong, unfortunately</p>`
 		throw new Error(`${res.status} ${res.statusText}`)
 	}
 		const datapost = await res.json()

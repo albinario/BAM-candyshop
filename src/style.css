@@ -131,6 +131,10 @@ img {
 	color: white;
 }
 
+.order .alert-danger{
+	color: red;
+}
+
 .img-container{
 	display: flex;
 	justify-content: center;
