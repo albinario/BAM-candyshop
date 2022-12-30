@@ -11,3 +11,8 @@ export type Candy = {
 	stock_status: string
 	stock_quantity: number
 }
+
+export type CandyInCart = {
+	candy: Candy
+	amount: number
+}

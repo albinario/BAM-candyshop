@@ -20,7 +20,7 @@
 				<div class="col-6 text-end">
 					<button id="cart-btn" type="button" class="btn btn-lg btn-outline-warning" aria-label="shopping-cart">
 						<i class="fa-solid fa-cart-shopping m-1"></i>
-						<span class="in-cart badge bg-success"></span>
+						<span class="scoops-in-cart badge bg-success" title="Scoops in cart"></span>
 					</button>
 				</div>
 			</header>
@@ -28,18 +28,19 @@
 			<main class="row"></main>
 			<section id="popup" class="d-none">
 				<div class="popup-content p-3">
-					<img src="logo.svg" alt="BAM Candyshop">
+					<img src="logo.svg" alt="BAM Candyshop" class="my-3">
 					<div class="popup-close p-2 mx-1 fs-3"><i class="fa-solid fa-rectangle-xmark"></i></div>
 					<table class="table table-sm table-dark table-striped">
 						<thead>
 							<tr>
-								<th scope="col" colspan="3"><span class="in-cart"></span> candies in cart</th>
+								<th scope="col" colspan="3"><span class="candys-in-cart badge bg-warning"></span> <span class="d-none d-sm-inline">candies </span><i class="fa-solid fa-candy-cane"></i> <span class="scoops-in-cart badge bg-warning ms-3"></span> <span class="d-none d-sm-inline">scoops </span><i class="fa-solid fa-spoon" title="Scoop"></i></th>
 								<th scope="col" class="text-center"><i class="fa-solid fa-spoon" title="Scoop"></i></th>
 								<th scope="col" class="text-center">Tot<span class="d-none d-sm-inline">al</span></th>
 							</tr>
 						</thead>
 						<tbody class="table-content"></tbody>
 					</table>
+					<div class="text-end text-white me-1 fs-3"><span id="total-price"></span> kr</div>
 				</div>
 			</section>
 		</div>

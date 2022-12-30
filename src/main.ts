@@ -2,9 +2,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import './style.css'
 import { apiUrl, getCandys } from './api'
-import { Candy } from './types'
-import { headerEl, mainEl, cartBtnEl, inCartEls, popupCloseEl, popupEl, candyCountEl } from './elements'
-import { updateCart, renderCandyInCart } from './functions'
+import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl } from './elements'
+import { Candy, CandyInCart } from './types'
+import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners } from './functions'
 
 const candys = await getCandys()
 const candysArr: Candy[] = candys.data
@@ -53,25 +53,29 @@ mainEl.innerHTML = candysArr.map(candy => `
 )
 .join('')
 
-const storedCandys = localStorage.getItem('in-cart') ?? '[]'
-const candysInCart: Candy[] = JSON.parse(storedCandys)
-if (candysInCart.length){
-	inCartEls.forEach(el => el.innerHTML = String(candysInCart.length))
+const storedCandysInCart = localStorage.getItem('candys-in-cart') ?? '[]'
+const candysInCart: CandyInCart[] = JSON.parse(storedCandysInCart)
+
+if (candysInCart.length) {
+	updateCart(candysInCart)
 	candysInCart.forEach(candy => renderCandyInCart(candy))
+	setCandyInCartListeners(candysInCart)
 }
 
 candysArr.forEach(candy => {
 	document.querySelector(`#buy-${candy.id}`)?.addEventListener('click', () => {
-		updateCart(candysInCart, candy)
+		addToCart(candysInCart, candy)
 	})
 	document.querySelector(`#buy-view-${candy.id}`)?.addEventListener('click', () => {
-		updateCart(candysInCart, candy)
+		addToCart(candysInCart, candy)
 	})
 })
 
 cartBtnEl.addEventListener('click', () => {
-	popupEl.classList.remove('d-none')
-	headerEl.classList.remove('sticky-top')
+	if (candysInCart.length) {
+		popupEl.classList.remove('d-none')
+		headerEl.classList.remove('sticky-top')
+	}
 })
 
 popupCloseEl.addEventListener('click', () => {
