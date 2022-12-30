@@ -1,3 +1,6 @@
+import { orderMsgEl, } from "./elements"
+import { IOrder } from "./types"
+
 export const apiUrl = 'https://www.bortakvall.se'
 
 export const getCandys = async () => {
@@ -8,4 +11,27 @@ export const getCandys = async () => {
 	}
 
 	return await res.json()
+}
+
+export const createOrder = async (newOrder: IOrder) => {
+	const res = await fetch('https://www.bortakvall.se/api/orders', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(newOrder),
+	})
+
+	if (!res.ok) {
+		throw new Error(`${res.status} ${res.statusText}`)
+	}else {
+        orderMsgEl.innerHTML = `
+        <i class="fa-solid fa-handshake"></i>
+        `
+    }
+
+	const datapost = await res.json() as IOrder
+    console.log('svar', datapost);
+    return datapost
+
 }

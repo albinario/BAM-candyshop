@@ -30,16 +30,53 @@
 				<div class="popup-content p-3">
 					<img src="logo.svg" alt="BAM Candyshop">
 					<div class="popup-close p-2 mx-1 fs-3"><i class="fa-solid fa-rectangle-xmark"></i></div>
-					<table class="table table-sm table-dark table-striped">
-						<thead>
-							<tr>
-								<th scope="col" colspan="3"><span class="in-cart"></span> candies in cart</th>
-								<th scope="col" class="text-center"><i class="fa-solid fa-spoon" title="Scoop"></i></th>
-								<th scope="col" class="text-center">Tot<span class="d-none d-sm-inline">al</span></th>
-							</tr>
-						</thead>
-						<tbody class="table-content"></tbody>
-					</table>
+					<div class="order-msg">
+						<table class="table table-sm table-dark table-striped">
+							<thead>
+								<tr>
+									<th scope="col" colspan="3"><span class="in-cart"></span> candies in cart</th>
+									<th scope="col" class="text-center"><i class="fa-solid fa-spoon" title="Scoop"></i></th>
+									<th scope="col" class="text-center">Tot<span class="d-none d-sm-inline">al</span></th>
+								</tr>
+							</thead>
+							<tbody class="table-content"></tbody>
+						</table>
+						<form id="place-order" class="row g-3">
+							<p class="form-header"><i class="fa-sharp fa-solid fa-pencil"></i> Please fill out the form to complete your order:</p>
+							<div class="col-md-6">
+							<input type="text" class="form-control" id="first-name" placeholder="First name" aria-label="First name" required>
+							</div>
+							<div class="col-md-6">
+							<input type="text" class="form-control" id="last-name" placeholder="Last name" aria-label="Last name" required>
+							</div>
+							<div class="col-md-6">
+								<input type="email" class="form-control" id="email" placeholder="Email" aria-label="Email" required>
+							</div>
+							<div class="col-md-6">
+								<input type="tel" class="form-control" id="tel" placeholder="Phone number" aria-label="Phone number">
+							</div>
+							<div class="col-12">
+							<input type="text" class="form-control" id="address" placeholder="Enter adress" aria-label="Adress" required>
+							</div>
+							<div class="col-md-6">
+							<input type="text" class="form-control" id="city" placeholder="City" aria-label="City" required>
+							</div>
+							<div class="col-md-6">
+							<input type="text" class="form-control" id="zip" placeholder="Zip code" aria-label="Zip code" required>
+							</div>
+							<div class="col-12">
+								<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="gridCheck">
+								<label class="form-check-label" for="gridCheck">
+									Agree to our <a href="#">terms</a> and <a href="#">conditions</a>
+								</label>
+								</div>
+							</div>
+							<div class="col-12">
+							<button type="submit" class="btn submit-button">Submit</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</section>
 		</div>

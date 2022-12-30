@@ -100,3 +100,29 @@ img {
 .sold-out {
 	position: absolute;
 }
+
+.submit-button {
+    background-color: #f6fd53;
+    color: black;
+}
+
+.submit-button:hover {
+	background-color: green;
+}
+
+.form-header {
+    color: white;
+    margin-bottom: 0px;
+}
+
+.form-check-label {
+    color: white;
+}
+
+.fa-handshake{
+	color: #f6fd53;
+	display: flex;
+	justify-content: center;
+	font-size: 500px;
+	
+}
