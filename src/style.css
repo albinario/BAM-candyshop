@@ -127,7 +127,7 @@ img {
 	
 }
 
-.order-msg h3, p{
+.order h3, .order p{
 	color: white;
 }
 
@@ -138,6 +138,8 @@ img {
 
 .id-color {
 	font-size: 1.5em;
-	color: green;
+	color: #f6fd53;
 }
+
+
 

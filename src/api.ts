@@ -22,10 +22,14 @@ export const createOrder = async (newOrder: IOrder) => {
 		body: JSON.stringify(newOrder),
 	})
   
-
+	console.log(res);
+	
+	
 	if (!res.ok) {
+		orderMsgEl.innerHTML += `
+		<p class="alert alert-danger mt-3 text-black">Something went wrong, unfortunately</p>`
 		throw new Error(`${res.status} ${res.statusText}`)
-	}else {
+	}
 		const datapost = await res.json()
     	console.log('svar', datapost);
         orderMsgEl.innerHTML = `
@@ -41,9 +45,4 @@ export const createOrder = async (newOrder: IOrder) => {
 		<img src="/assets/mans_edenfalk.jpg" alt="">
 		</div>
         `
-
-    }
-
-	
-
 }
