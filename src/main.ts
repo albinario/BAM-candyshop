@@ -3,7 +3,7 @@ import 'bootstrap/dist/js/bootstrap.js'
 import './style.css'
 import { apiUrl, getCandys } from './api'
 import { Candy, CandyInCart } from './types'
-import { shuffleArray, addToCart, renderCandyInCart, updateInCartEls } from './functions'
+import { shuffleArray, addToCart, renderCandyInCart, updateCart, setCandyInCartListeners } from './functions'
 import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl } from './elements'
 
 const candys = await getCandys()
@@ -46,11 +46,13 @@ mainEl.innerHTML = candysArr.map(candy => `
 `)
 .join('')
 
-const storedCandys = localStorage.getItem('in-cart') ?? '[]'
-const candysInCart: CandyInCart[] = JSON.parse(storedCandys)
+const storedCandysInCart = localStorage.getItem('candys-in-cart') ?? '[]'
+const candysInCart: CandyInCart[] = JSON.parse(storedCandysInCart)
+
 if (candysInCart.length) {
-	updateInCartEls(candysInCart)
+	updateCart(candysInCart)
 	candysInCart.forEach(candy => renderCandyInCart(candy))
+	setCandyInCartListeners(candysInCart)
 }
 
 candysArr.forEach(candy => {
@@ -63,8 +65,10 @@ candysArr.forEach(candy => {
 })
 
 cartBtnEl.addEventListener('click', () => {
-	popupEl.classList.remove('d-none')
-	headerEl.classList.remove('sticky-top')
+	if (candysInCart.length) {
+		popupEl.classList.remove('d-none')
+		headerEl.classList.remove('sticky-top')
+	}
 })
 
 popupCloseEl.addEventListener('click', () => {
