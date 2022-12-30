@@ -119,7 +119,7 @@ img {
     color: white;
 }
 
-.fa-handshake{
+.fa-handshake {
 	color: #f6fd53;
 	display: flex;
 	justify-content: center;
@@ -127,17 +127,17 @@ img {
 	
 }
 
-.order-msg h3, p{
+.order h3 {
 	color: white;
 }
 
-.img-container{
+.img-container {
 	display: flex;
 	justify-content: center;
+	gap: 1em;
 }
 
-.id-color {
+.order-id {
 	font-size: 1.5em;
-	color: green;
+	color: #f6fd53;
 }
-

@@ -74,7 +74,7 @@ const countScoops = (candysInCart: CandyInCart[]) => {
 }
 
 //funktion för att räkna ut totalpriset i hela carten
-const countTotalPrice = (candysInCart: CandyInCart[]) => {
+export const countTotalPrice = (candysInCart: CandyInCart[]) => {
 	let totalPrice = 0
 	candysInCart.forEach(candy => {
 		totalPrice += candy.candy.price * candy.amount

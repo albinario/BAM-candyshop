@@ -17,4 +17,4 @@ export const addressEl = document.querySelector<HTMLInputElement>('#address')!
 export const cityEl = document.querySelector<HTMLInputElement>('#city')!
 export const zipEl = document.querySelector<HTMLInputElement>('#zip')!
 
-export const orderMsgEl = document.querySelector(".order-msg")!
+export const orderEl = document.querySelector('.order')!

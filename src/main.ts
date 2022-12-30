@@ -2,10 +2,11 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import './style.css'
 
-import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners } from './functions'
+import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, countTotalPrice } from './functions'
 import { apiUrl, createOrder, getCandys } from './api'
-import { Candy, CandyInCart, IOrder } from './types'
-import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl } from './elements'
+import { Candy, CandyInCart } from './types'
+import { IOrder } from './interfaces'
+import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl } from './elements'
 
 const candys = await getCandys()
 const candysArr: Candy[] = candys.data
@@ -85,26 +86,43 @@ popupCloseEl.addEventListener('click', () => {
 })
 
 document.querySelector('#place-order')?.addEventListener('submit', async e => {
-	
-	console.log(firstNameEl.value)
-
-	e.preventDefault()
-	const neworder: IOrder = {
+e.preventDefault()
+	const newOrder: IOrder = {
 		"customer_first_name": firstNameEl.value,
 		"customer_last_name": lastNameEl.value, 
 		"customer_address": addressEl.value,
 		"customer_postcode": zipEl.value,
 		"customer_city": cityEl.value,
 		"customer_email": emailEl.value,
-		"order_total": 24,
-		"order_items": [
-			{
-				"product_id": 5216,
-				"qty": 2,
-				"item_price": 12,
-				"item_total": 24
+		"order_total": countTotalPrice(candysInCart),
+		"order_items": candysInCart.map(candy => {
+			return {
+				"product_id": candy.candy.id,
+				"qty": candy.amount,
+				"item_price": candy.candy.price,
+				"item_total": candy.candy.price * candy.amount
 			}
-		]
+		})
 	}
-	await createOrder(neworder)
+	const createdOrder = await createOrder(newOrder)
+
+	if (createdOrder.status === 'fail') {
+		orderEl.innerHTML += `<p class="alert alert-danger mt-3">${createdOrder.message}</p>`
+	} else {
+		console.log(createdOrder.data.items);
+		
+		orderEl.innerHTML = `
+			<i class="fa-solid fa-handshake"></i>
+			<h3>Thank you for the order!</h3>
+			<p>Your order ID is <span class="order-id">${createdOrder.data.id}</span</p>
+			<p>We have sent a order confirmation to <a href="#">${createdOrder.data.customer_email}</a></p>
+			<p>Have a great day and enjoy your candy soon!</p>
+			<p>All the best from the <img class="bam-staff-img"src="logo.svg" alt="BAM Candyshop"> staff ❤️ </p>
+			<div class="img-container">
+				<img src="/assets/mans_edenfalk.jpg" alt="Måns Edenfalk" class="card">
+				<img src="/assets/bob_oskar_kindgren.jpg" alt="Bob Oskar Kindgren" class="card">
+				<img src="/assets/albin_lindeborg.jpg" alt="Albin Lindeborg" class="card">
+			</div>
+		`
+	}
 })
