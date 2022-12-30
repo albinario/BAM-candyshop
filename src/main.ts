@@ -1,10 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import './style.css'
-import { apiUrl, getCandys } from './api'
-import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl } from './elements'
-import { Candy, CandyInCart } from './types'
+
 import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners } from './functions'
+import { apiUrl, createOrder, getCandys } from './api'
+import { Candy, CandyInCart, IOrder } from './types'
+import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl } from './elements'
 
 const candys = await getCandys()
 const candysArr: Candy[] = candys.data
@@ -81,4 +82,29 @@ cartBtnEl.addEventListener('click', () => {
 popupCloseEl.addEventListener('click', () => {
 	popupEl.classList.add('d-none')
 	headerEl.classList.add('sticky-top')
+})
+
+document.querySelector('#place-order')?.addEventListener('submit', async e => {
+	
+	console.log(firstNameEl.value)
+
+	e.preventDefault()
+	const neworder: IOrder = {
+		"customer_first_name": firstNameEl.value,
+		"customer_last_name": lastNameEl.value, 
+		"customer_address": addressEl.value,
+		"customer_postcode": zipEl.value,
+		"customer_city": cityEl.value,
+		"customer_email": emailEl.value,
+		"order_total": 24,
+		"order_items": [
+			{
+				"product_id": 5216,
+				"qty": 2,
+				"item_price": 12,
+				"item_total": 24
+			}
+		]
+	}
+	await createOrder(neworder)
 })
