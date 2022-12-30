@@ -21,17 +21,17 @@ export const createOrder = async (newOrder: IOrder) => {
 		},
 		body: JSON.stringify(newOrder),
 	})
+  
 
 	if (!res.ok) {
 		throw new Error(`${res.status} ${res.statusText}`)
 	}else {
+        const response = await res.json()
+
         orderMsgEl.innerHTML = `
         <i class="fa-solid fa-handshake"></i>
-        `
+        <p>${response.data.id}
+        
+       `
     }
-
-	const datapost = await res.json() as IOrder
-    console.log('svar', datapost);
-    return datapost
-
 }
