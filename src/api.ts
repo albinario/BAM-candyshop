@@ -21,6 +21,7 @@ export const createOrder = async (newOrder: IOrder) => {
 		},
 		body: JSON.stringify(newOrder),
 	})
+  
 
 	if (!res.ok) {
 		throw new Error(`${res.status} ${res.statusText}`)
