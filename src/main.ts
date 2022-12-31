@@ -4,7 +4,7 @@ import './style.css'
 
 import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, countTotalPrice } from './functions'
 import { apiUrl, createOrder, getCandys } from './api'
-import { Candy, CandyInCart } from './types'
+import { Candy, CandyInCart, OrderedItem } from './types'
 import { IOrder } from './interfaces'
 import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl } from './elements'
 
@@ -109,20 +109,27 @@ e.preventDefault()
 	if (createdOrder.status === 'fail') {
 		orderEl.innerHTML += `<p class="alert alert-danger mt-3">${createdOrder.message}</p>`
 	} else {
-		console.log(createdOrder.data.items);
+		// console.log(createdOrder.data);
 		
 		orderEl.innerHTML = `
 			<i class="fa-solid fa-handshake"></i>
-			<h3>Thank you for the order!</h3>
+			<h3>Thank you, ${createdOrder.data.customer_first_name}!</h3>
 			<p>Your order ID is <span class="order-id">${createdOrder.data.id}</span</p>
 			<p>We have sent a order confirmation to <a href="#">${createdOrder.data.customer_email}</a></p>
 			<p>Have a great day and enjoy your candy soon!</p>
-			<p>All the best from the <img class="bam-staff-img"src="logo.svg" alt="BAM Candyshop"> staff ❤️ </p>
-			<div class="img-container">
+			<div id="ordered-candys" class="img-container my-3"></div>
+			<p>❤️ All the best from the staff at</p>
+			<img src="logo.svg" alt="BAM Candyshop">
+			<div class="img-container my-3">
 				<img src="/assets/mans_edenfalk.jpg" alt="Måns Edenfalk" class="card">
 				<img src="/assets/bob_oskar_kindgren.jpg" alt="Bob Oskar Kindgren" class="card">
 				<img src="/assets/albin_lindeborg.jpg" alt="Albin Lindeborg" class="card">
 			</div>
 		`
+		const orderedCandys: OrderedItem[] = createdOrder.data.items
+		orderedCandys.forEach(orderedCandy => {
+			const candy = candysArr.find(candy => candy.id === orderedCandy.product_id)
+			document.querySelector('#ordered-candys')!.innerHTML += `<img src="${apiUrl}/${candy?.images.thumbnail}" alt="${candy?.name}" class="card" title="${candy?.name}">`
+		})
 	}
 })

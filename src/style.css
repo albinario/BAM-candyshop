@@ -109,35 +109,32 @@ img {
 .submit-button:hover {
 	background-color: green;
 }
-
-.form-header {
-    color: white;
-    margin-bottom: 0px;
+.form-check-label {
+	color: white;
 }
 
-.form-check-label {
-    color: white;
+.order {
+	overflow: hidden;
+	color: white;
+}
+
+.order a {
+	color: white;
+}
+
+.order-id {
+	font-size: 1.5em;
+	color: #f6fd53;
 }
 
 .fa-handshake {
 	color: #f6fd53;
 	display: flex;
 	justify-content: center;
-	font-size: 500px;
-	
-}
-
-.order h3 {
-	color: white;
+	font-size: 400px;
 }
 
 .img-container {
 	display: flex;
-	justify-content: center;
 	gap: 1em;
-}
-
-.order-id {
-	font-size: 1.5em;
-	color: #f6fd53;
 }
