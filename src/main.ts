@@ -104,18 +104,19 @@ e.preventDefault()
 			}
 		})
 	}
-	const createdOrder = await createOrder(newOrder)
 
+	const createdOrder = await createOrder(newOrder)
 	if (createdOrder.status === 'fail') {
-		orderEl.innerHTML += `<p class="alert alert-danger mt-3">${createdOrder.message}</p>`
-	} else {
-		// console.log(createdOrder.data);
+		console.log(createdOrder)
 		
+		orderEl.innerHTML += `<p class="alert alert-danger mt-3">${createdOrder.message}. Your order could not be completed.</p>`
+	} else {
 		orderEl.innerHTML = `
 			<i class="fa-solid fa-handshake"></i>
 			<h3>Thank you, ${createdOrder.data.customer_first_name}!</h3>
-			<p>Your order ID is <span class="order-id">${createdOrder.data.id}</span</p>
-			<p>We have sent a order confirmation to <a href="#">${createdOrder.data.customer_email}</a></p>
+			<p>Your order ID is <span class="text-bam ms-1 fs-2">${createdOrder.data.id}</span></p>
+			<p>Registered at <span class="text-bam">${createdOrder.data.order_date}</span></p>
+			<p>We have sent a order confirmation to <span class="text-bam">${createdOrder.data.customer_email}</span></p>
 			<p>Have a great day and enjoy your candy soon!</p>
 			<div id="ordered-candys" class="img-container my-3"></div>
 			<p>❤️ All the best from the staff at</p>
