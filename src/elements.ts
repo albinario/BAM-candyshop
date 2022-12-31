@@ -1,5 +1,6 @@
 export const headerEl = document.querySelector('header')!
 export const mainEl = document.querySelector('main')!
+export const footerEl = document.querySelector('footer')!
 export const cartBtnEl = document.querySelector('#cart-btn')!
 export const scoopsInCartEls = document.querySelectorAll('.scoops-in-cart')
 export const candysInCartEl = document.querySelector('.candys-in-cart')!

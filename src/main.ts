@@ -6,7 +6,7 @@ import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, coun
 import { apiUrl, createOrder, getCandys } from './api'
 import { Candy, CandyInCart, OrderedItem } from './types'
 import { IOrder } from './interfaces'
-import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl } from './elements'
+import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl, footerEl } from './elements'
 
 const candys = await getCandys()
 const candysArr: Candy[] = candys.data
@@ -77,12 +77,14 @@ cartBtnEl.addEventListener('click', () => {
 	if (candysInCart.length) {
 		popupEl.classList.remove('d-none')
 		headerEl.classList.remove('sticky-top')
+		footerEl.classList.remove('sticky-bottom')
 	}
 })
 
 popupCloseEl.addEventListener('click', () => {
 	popupEl.classList.add('d-none')
 	headerEl.classList.add('sticky-top')
+	footerEl.classList.add('sticky-bottom')
 })
 
 document.querySelector('#place-order')?.addEventListener('submit', async e => {
