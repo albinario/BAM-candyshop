@@ -28,7 +28,7 @@ export const renderCandyInCart = (candy: CandyInCart) => {
 				<span id="add-${candy.candy.id}" class="badge bg-success">+</span>
 			</td>
 			<td class="text-center text-nowrap">${candy.candy.price} kr</td>
-			<td id="total-${candy.candy.id}" class="text-center text-nowrap">${candy.candy.price * candy.amount} kr</td>
+			<td class="text-center text-nowrap"><span id="total-${candy.candy.id}">${candy.candy.price * candy.amount}</span> kr</td>
 		</tr>
 	`
 }

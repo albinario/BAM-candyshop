@@ -122,9 +122,9 @@ e.preventDefault()
 			<p>❤️ All the best from the staff at</p>
 			<img src="logo.svg" alt="BAM Candyshop">
 			<div class="img-container my-3">
-				<img src="/assets/mans_edenfalk.jpg" alt="Måns Edenfalk" class="card">
-				<img src="/assets/bob_oskar_kindgren.jpg" alt="Bob Oskar Kindgren" class="card">
-				<img src="/assets/albin_lindeborg.jpg" alt="Albin Lindeborg" class="card">
+				<img src="/assets/mans_edenfalk.jpg" alt="Måns Edenfalk" title="Måns Edenfalk" class="card">
+				<img src="/assets/bob_oskar_kindgren.jpg" alt="Bob Oskar Kindgren" title="Bob Oskar Kindgren" class="card">
+				<img src="/assets/albin_lindeborg.jpg" alt="Albin Lindeborg" title="Albin Lindeborg" class="card">
 			</div>
 		`
 		const orderedCandys: OrderedItem[] = createdOrder.data.items
