@@ -100,12 +100,18 @@ export const updateInStock = (candyId: number, inStock: number) => {
 			el.innerHTML = 'Out of stock'
 		}
 	})
+	const buyBtnEl = document.getElementById(`buy-${candyId}`) as HTMLInputElement
+	const buyViewBtnEl = document.getElementById(`buy-view-${candyId}`) as HTMLInputElement
 	if (inStock > 0) {
 		document.querySelector(`#max-${candyId}`)?.classList.add('d-none')
 		document.querySelector(`#add-${candyId}`)?.classList.remove('d-none')
+		buyBtnEl.disabled = false
+		buyViewBtnEl.disabled = false
 	} else {
 		document.querySelector(`#add-${candyId}`)?.classList.add('d-none')
 		document.querySelector(`#max-${candyId}`)?.classList.remove('d-none')
+		buyBtnEl.disabled = true
+		buyViewBtnEl.disabled = true
 	}
 }
 
