@@ -98,13 +98,9 @@ tbody {
 	color: white;
 }
 
-.sold-out-parent {
+/* .sold-out-parent {
 	position: relative;
-}
-
-.sold-out {
-	position: absolute;
-}
+} */
 
 .submit-button {
     background-color: #f6fd53;

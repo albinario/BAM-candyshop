@@ -19,3 +19,4 @@ export const cityEl = document.querySelector<HTMLInputElement>('#city')!
 export const zipEl = document.querySelector<HTMLInputElement>('#zip')!
 
 export const orderEl = document.querySelector('.order')!
+export const placeOrderEl = document.querySelector('#place-order')!

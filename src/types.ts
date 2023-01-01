@@ -14,7 +14,9 @@ export type Candy = {
 
 export type CandyInCart = {
 	candy: Candy
-	amount: number
+	in_cart: number
+	in_stock: number
+	show: boolean
 }
 
 export type OrderItem = {

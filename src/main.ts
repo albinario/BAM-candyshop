@@ -2,28 +2,29 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import './style.css'
 
-import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, countTotalPrice } from './functions'
+import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, countTotalPrice, updateInStock } from './functions'
 import { apiUrl, createOrder, getCandys } from './api'
 import { Candy, CandyInCart, OrderedItem } from './types'
 import { IOrder } from './interfaces'
-import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl, footerEl } from './elements'
+import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl, footerEl, placeOrderEl } from './elements'
 
 const candys = await getCandys()
 const candysArr: Candy[] = candys.data
 candysArr.sort((a, b) => a.name.localeCompare(b.name))
 
 const candyInStock = candysArr.filter(candy => candy.stock_quantity > 0)
-	
 candyCountEl.innerHTML = `<p>🍭🍬🍫 ${candyInStock.length} available candies in stock out of ${candysArr.length} candies in a candy dream world 🍭🍬🍫</p>`
 
 mainEl.innerHTML = candysArr.map(candy => `
 	<div class="col-6 col-md-4 col-lg-3">
 		<div class="card my-2">
-			<img src="${apiUrl}/${candy.images.thumbnail}" class="card-img-top sold-out-parent" alt="${candy.name}">
-			<p class="sold-out p-1">${!candy.stock_quantity ? '<span class="badge bg-danger">Sold out</span>'  : ''}</p>
+			<img src="${apiUrl}/${candy.images.thumbnail}" class="card-img-top" alt="${candy.name}">
+			<span class="in-stock-${candy.id} badge bg-success position-absolute m-2"></span>
 			<div class="card-body text-center">
 				<p class="card-title">${candy.name}</p>
-				<p class="card-text"><i class="fa-solid fa-piggy-bank"></i> ${candy.price} sek</p>
+				<p class="card-text">
+					<i class="fa-solid fa-piggy-bank"></i> ${candy.price} kr
+				</p>
 				<div class="d-flex justify-content-between">
 					<button class="btn btn-warning" aria-label="view-candy" type="button" data-bs-toggle="modal" data-bs-target="#view-${candy.id}"><i class="fa-regular fa-eye"></i><span class="d-none d-sm-inline"> View</span></button>
 					<button id="buy-${candy.id}" class="buy-btn btn btn-success" aria-label="buy-candy" ${candy.stock_quantity ? '' : 'disabled'}> <i class="fa-solid fa-plus"></i> Buy</button>
@@ -39,7 +40,7 @@ mainEl.innerHTML = candysArr.map(candy => `
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body sold-out-parent">
-				<p class="sold-out p-1">${!candy.stock_quantity ? '<span class="badge bg-danger">Sold out</span>' : ''}</p>
+					<span class="in-stock-${candy.id} badge bg-success position-absolute m-1"></span>
 					<img src="${apiUrl}/${candy.images.large}" alt="${candy.name}">
 					${candy.description}
 					<p class="fw-bold"><i class="fa-solid fa-piggy-bank"></i> ${candy.price} sek</p>
@@ -66,18 +67,29 @@ if (candysInCart.length) {
 
 candysArr.forEach(candy => {
 	document.querySelector(`#buy-${candy.id}`)?.addEventListener('click', () => {
-		addToCart(candysInCart, candy)
+		addToCart(candy, candysInCart)
 	})
 	document.querySelector(`#buy-view-${candy.id}`)?.addEventListener('click', () => {
-		addToCart(candysInCart, candy)
+		addToCart(candy, candysInCart)
 	})
+
+	const foundCandy = candysInCart.find(c => c.candy.id === candy.id)
+	if (foundCandy) {
+		updateInStock(candy.id, foundCandy.in_stock)
+	} else {
+		updateInStock(candy.id, candy.stock_quantity)
+	}
 })
 
 cartBtnEl.addEventListener('click', () => {
-	if (candysInCart.length) {
-		popupEl.classList.remove('d-none')
-		headerEl.classList.remove('sticky-top')
-		footerEl.classList.remove('sticky-bottom')
+	popupEl.classList.remove('d-none')
+	headerEl.classList.remove('sticky-top')
+	footerEl.classList.remove('sticky-bottom')
+
+	if (candysInCart.filter(c => c.show).length) {
+		placeOrderEl.classList.remove('d-none')
+	} else {
+		placeOrderEl.classList.add('d-none')
 	}
 })
 
@@ -87,7 +99,7 @@ popupCloseEl.addEventListener('click', () => {
 	footerEl.classList.add('sticky-bottom')
 })
 
-document.querySelector('#place-order')?.addEventListener('submit', async e => {
+placeOrderEl.addEventListener('submit', async e => {
 e.preventDefault()
 	const newOrder: IOrder = {
 		"customer_first_name": firstNameEl.value,
@@ -100,9 +112,9 @@ e.preventDefault()
 		"order_items": candysInCart.map(candy => {
 			return {
 				"product_id": candy.candy.id,
-				"qty": candy.amount,
+				"qty": candy.in_cart,
 				"item_price": candy.candy.price,
-				"item_total": candy.candy.price * candy.amount
+				"item_total": candy.candy.price * candy.in_cart
 			}
 		})
 	}
