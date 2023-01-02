@@ -130,7 +130,7 @@ e.preventDefault()
 			<h3>Thank you, ${createdOrder.data.customer_first_name}!</h3>
 			<p>Your order ID is <span class="text-bam ms-1 fs-2">${createdOrder.data.id}</span></p>
 			<p>Registered at <span class="text-bam">${createdOrder.data.order_date}</span></p>
-			<p>We have sent a order confirmation to <span class="text-bam">${createdOrder.data.customer_email}</span></p>
+			<p>We have sent an order confirmation to <span class="text-bam">${createdOrder.data.customer_email}</span></p>
 			<p>Have a great day and enjoy your candy soon!</p>
 			<div id="ordered-candys" class="img-container my-3"></div>
 			<p>❤️ All the best from the staff at</p>
