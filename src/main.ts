@@ -4,8 +4,8 @@ import './style.css'
 
 import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, countTotalPrice, updateInStock } from './functions'
 import { apiUrl, createOrder, getCandys } from './api'
-import { Candy, CandyInCart, OrderedItem } from './types'
-import { IOrder } from './interfaces'
+import { Candy, CandyInCart } from './types'
+import { IOrder, OrderedItem } from './interfaces'
 import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl, footerEl, placeOrderEl } from './elements'
 
 const candys = await getCandys()

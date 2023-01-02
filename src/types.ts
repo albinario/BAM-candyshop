@@ -18,19 +18,3 @@ export type CandyInCart = {
 	in_stock: number
 	show: boolean
 }
-
-export type OrderItem = {
-	"product_id": number
-	"qty": number
-	"item_price": number
-	"item_total": number
-}
-
-export type OrderedItem = {
-	"id": number
-	"item_price": number
-	"item_total": number
-	"order_id": number
-	"product_id": number
-	"qty": number
-}
