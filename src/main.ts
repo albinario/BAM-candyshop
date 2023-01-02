@@ -4,12 +4,12 @@ import './style.css'
 
 import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, countTotalPrice } from './functions'
 import { apiUrl, createOrder, getCandys } from './api'
-import { Candy, CandyInCart } from './types'
-import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, } from './elements'
+import { Candy, CandyInCart, OrderedItem } from './types'
+import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl, } from './elements'
 import { IOrder } from './interfaces'
 
 const candys = await getCandys()
-const candysArr: Candy[] = candys.data
+export const candysArr: Candy[] = candys.data
 candysArr.sort((a, b) => a.name.localeCompare(b.name))
 
 const candyInStock = candysArr.filter(candy => candy.stock_quantity > 0)
@@ -86,9 +86,6 @@ popupCloseEl.addEventListener('click', () => {
 })
 
 document.querySelector('#place-order')?.addEventListener('submit', async e => {
-	
-	console.log(firstNameEl.value)
-
 	e.preventDefault()
 
 	const neworder: IOrder = {
@@ -101,12 +98,39 @@ document.querySelector('#place-order')?.addEventListener('submit', async e => {
 		"order_total": countTotalPrice(candysInCart),
 		"order_items": candysInCart.map(candy => {
 			return {
-			"product_id": candy.candy.id,
-			"qty": candy.amount,
-			"item_price": candy.candy.price,
-			"item_total": candy.candy.price * candy.amount 
+				"product_id": candy.candy.id,
+				"qty": candy.amount,
+				"item_price": candy.candy.price,
+				"item_total": candy.candy.price * candy.amount 
 			}
 		})
 	}
-	await createOrder(neworder)
+	const createdOrder = await createOrder(neworder)
+	console.log(createdOrder);
+	if (createdOrder.status === 'fail'){
+		orderEl.innerHTML += `<p class="alert alert-danger mt-3">${createdOrder.message}. Your order could not be completed.</p>`
+	} else {
+		orderEl.innerHTML = `
+			<i class="fa-solid fa-handshake"></i>
+			<h3>Thank you for the order!</h3>
+			<p>Your order ID is <span class="bam-color">${createdOrder.data.id}</span</p>
+			<p>Registered at:<span class="bam-color"> ${createdOrder.data.order_date}</span></p>
+			<p>We have sent a order confirmation to <span class="bam-color">${createdOrder.data.customer_email}</span></p>
+			<p>Have a great day and enjoy your candy soon!</p>
+			<div id="ordered-candys" class="img-container my-3"></div>
+			<p>All the best from the staff ❤️ </p>
+			<img class="bam-staff-img"src="logo.svg" alt="BAM Candyshop">
+			<div class="img-container">
+			<img class="card" src="/assets/albin_lindeborg.jpg" alt="">
+			<img class="card" src="/assets/bob_oskar_kindgren.jpg" alt="">
+			<img class="card" src="/assets/mans_edenfalk.jpg" alt="">
+			</div>
+		`
+		const orderedCandys: OrderedItem[] = createdOrder.data.items
+
+        orderedCandys.forEach(orderedCandy => {
+            const candy = candysArr.find(candy => candy.id === orderedCandy.product_id)
+            document.querySelector('#ordered-candys')!.innerHTML += `<img src="${apiUrl}/${candy?.images.thumbnail}" alt="${candy?.name}" class="card" title="${candy?.name}">`
+        })
+	}
 })
