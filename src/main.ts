@@ -13,7 +13,7 @@ const candysArr: Candy[] = candys.data
 candysArr.sort((a, b) => a.name.localeCompare(b.name))
 
 const candyInStock = candysArr.filter(candy => candy.stock_quantity > 0)
-candyCountEl.innerHTML = `<p>🍭🍬🍫 ${candyInStock.length} available candies in stock out of ${candysArr.length} candies in a candy dream world 🍭🍬🍫</p>`
+candyCountEl.innerHTML = `<p class="px-2">🍭🍬🍫 ${candyInStock.length} available candies in stock out of ${candysArr.length} candies in a candy dream world 🍭🍬🍫</p>`
 
 mainEl.innerHTML = candysArr.map(candy => `
 	<div class="col-6 col-md-4 col-lg-3">
@@ -109,7 +109,7 @@ e.preventDefault()
 		"customer_city": cityEl.value,
 		"customer_email": emailEl.value,
 		"order_total": countTotalPrice(candysInCart),
-		"order_items": candysInCart.map(candy => {
+		"order_items": candysInCart.filter(c => c.show).map(candy => {
 			return {
 				"product_id": candy.candy.id,
 				"qty": candy.in_cart,
@@ -121,9 +121,9 @@ e.preventDefault()
 
 	const createdOrder = await createOrder(newOrder)
 	if (createdOrder.status === 'fail') {
-		console.log(createdOrder)
-		
-		orderEl.innerHTML += `<p class="alert alert-danger mt-3">${createdOrder.message}. Your order could not be completed.</p>`
+		Object.values(createdOrder.data).forEach(value => {
+			orderEl.innerHTML = `<p class="alert alert-danger mt-3">${value}</p>`
+		})
 	} else {
 		orderEl.innerHTML = `
 			<i class="fa-solid fa-handshake"></i>
