@@ -2,10 +2,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import './style.css'
 
-import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners } from './functions'
+import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, countTotalPrice } from './functions'
 import { apiUrl, createOrder, getCandys } from './api'
 import { Candy, CandyInCart, IOrder } from './types'
-import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl } from './elements'
+import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, } from './elements'
 
 const candys = await getCandys()
 const candysArr: Candy[] = candys.data
@@ -89,6 +89,7 @@ document.querySelector('#place-order')?.addEventListener('submit', async e => {
 	console.log(firstNameEl.value)
 
 	e.preventDefault()
+
 	const neworder: IOrder = {
 		"customer_first_name": firstNameEl.value,
 		"customer_last_name": lastNameEl.value, 
@@ -96,15 +97,15 @@ document.querySelector('#place-order')?.addEventListener('submit', async e => {
 		"customer_postcode": zipEl.value,
 		"customer_city": cityEl.value,
 		"customer_email": emailEl.value,
-		"order_total": 24,
-		"order_items": [
-			{
-				"product_id": 5216,
-				"qty": 2,
-				"item_price": 12,
-				"item_total": 24
+		"order_total": countTotalPrice(candysInCart),
+		"order_items": candysInCart.map(candy => {
+			return {
+			"product_id": candy.candy.id,
+			"qty": candy.amount,
+			"item_price": candy.candy.price,
+			"item_total": candy.candy.price * candy.amount 
 			}
-		]
+		})
 	}
 	await createOrder(neworder)
 })
