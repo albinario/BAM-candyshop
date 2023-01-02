@@ -5,7 +5,7 @@ import './style.css'
 import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, countTotalPrice, updateInStock } from './functions'
 import { apiUrl, createOrder, getCandys } from './api'
 import { Candy, CandyInCart } from './types'
-import { IOrder, OrderedItem } from './interfaces'
+import { IOrder, IOrderedItem } from './interfaces'
 import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl, footerEl, placeOrderEl } from './elements'
 
 const candys = await getCandys()
@@ -141,7 +141,7 @@ e.preventDefault()
 				<img src="/assets/albin_lindeborg.jpg" alt="Albin Lindeborg" title="Albin Lindeborg" class="card">
 			</div>
 		`
-		const orderedCandys: OrderedItem[] = createdOrder.data.items
+		const orderedCandys: IOrderedItem[] = createdOrder.data.items
 		orderedCandys.forEach(orderedCandy => {
 			const candy = candysArr.find(candy => candy.id === orderedCandy.product_id)
 			document.querySelector('#ordered-candys')!.innerHTML += `<img src="${apiUrl}/${candy?.images.thumbnail}" alt="${candy?.name}" class="card" title="${candy?.name}">`
