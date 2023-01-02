@@ -42,7 +42,7 @@ export const renderCandyInCart = (candy: CandyInCart) => {
 	`
 }
 
-//funktion för att lägga till klickevent på alla candys
+// funktion för att lägga till klickevent på alla candys
 export const setCandyInCartListeners = (candysInCart: CandyInCart[]) => {	
 	candysInCart.forEach(candy => {
 		document.querySelector(`#add-${candy.candy.id}`)?.addEventListener('click', () => {
@@ -70,7 +70,6 @@ export const setCandyInCartListeners = (candysInCart: CandyInCart[]) => {
 			}
 		})
 		document.querySelector(`#delete-${candy.candy.id}`)?.addEventListener('click', () => {
-			// candysInCart.splice(candysInCart.indexOf(candy), 1)
 			candy.show = false
 			updateCart(candysInCart)
 			document.querySelector(`#candy-${candy.candy.id}`)?.classList.add('d-none')
@@ -78,7 +77,7 @@ export const setCandyInCartListeners = (candysInCart: CandyInCart[]) => {
 	})
 }
 
-//funktion för att lägga till eller ta bort scoops
+// funktion för att lägga till eller ta bort scoops
 const scoop = (candy: CandyInCart, amount: number) => {
 	candy.in_cart = candy.in_cart + amount
 	candy.in_stock = candy.candy.stock_quantity - candy.in_cart
@@ -88,6 +87,7 @@ const scoop = (candy: CandyInCart, amount: number) => {
 	updateInStock(candy.candy.id, candy.in_stock)
 }
 
+// funktion för att uppdatera alla element som innehåller eller är relaterat till stock-värde
 export const updateInStock = (candyId: number, inStock: number) => {
 	document.querySelectorAll(`.in-stock-${candyId}`).forEach(el => {
 		if (inStock > 0) {
