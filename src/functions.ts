@@ -30,8 +30,8 @@ export const renderCandyInCart = (candy: CandyInCart) => {
 				<span class="in-stock-${candy.candy.id} badge bg-success d-inherit">${candy.in_stock} left in stock</span>
 			</td>
 			<td class="text-center text-nowrap">
-				<span id="delete-${candy.candy.id}" class="badge bg-danger d-none"><i class="fa-solid fa-trash-can"></i></span>
-				<span id="remove-${candy.candy.id}" class="badge bg-danger">-</span>
+				<span id="delete-${candy.candy.id}" class="badge bg-danger ${candy.in_cart > 0 ? 'd-none' : ''}"><i class="fa-solid fa-trash-can"></i></span>
+				<span id="remove-${candy.candy.id}" class="badge bg-danger ${candy.in_cart > 0 ? '' : 'd-none'}">-</span>
 				<span id="in-cart-${candy.candy.id}" class="badge bg-warning">${candy.in_cart}</span>
 				<span id="add-${candy.candy.id}" class="badge bg-success">+</span>
 				<span id="max-${candy.candy.id}" class="badge bg-secondary d-none"><i class="fa-solid fa-xmark" title="Out of stock"></i></span>
@@ -97,11 +97,11 @@ export const updateInStock = (candyId: number, inStock: number) => {
 		} else {
 			el.classList.remove('bg-success')
 			el.classList.add('bg-danger')
-			el.innerHTML = 'Out of stock'
+			el.innerHTML = 'Sold out'
 		}
 	})
-	const buyBtnEl = document.getElementById(`buy-${candyId}`) as HTMLInputElement
-	const buyViewBtnEl = document.getElementById(`buy-view-${candyId}`) as HTMLInputElement
+	const buyBtnEl = document.querySelector(`#buy-${candyId}`) as HTMLButtonElement
+	const buyViewBtnEl = document.querySelector(`#buy-view-${candyId}`) as HTMLButtonElement
 	if (inStock > 0) {
 		document.querySelector(`#max-${candyId}`)?.classList.add('d-none')
 		document.querySelector(`#add-${candyId}`)?.classList.remove('d-none')

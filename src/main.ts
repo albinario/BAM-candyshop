@@ -39,7 +39,7 @@ mainEl.innerHTML = candysArr.map(candy => `
 					<p class="modal-title fs-5" id="modal-label">${candy.name}</p>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body sold-out-parent">
+				<div class="modal-body">
 					<span class="in-stock-${candy.id} badge bg-success position-absolute m-1"></span>
 					<img src="${apiUrl}/${candy.images.large}" alt="${candy.name}">
 					${candy.description}
@@ -109,7 +109,7 @@ e.preventDefault()
 		"customer_city": cityEl.value,
 		"customer_email": emailEl.value,
 		"order_total": countTotalPrice(candysInCart),
-		"order_items": candysInCart.filter(c => c.show).map(candy => {
+		"order_items": candysInCart.filter(c => c.show && c.in_cart > 0).map(candy => {
 			return {
 				"product_id": candy.candy.id,
 				"qty": candy.in_cart,
