@@ -153,4 +153,10 @@ placeOrderEl.addEventListener('submit', async e => {
 			document.querySelector('#ordered-candys')!.innerHTML += `<img src="${apiUrl}/${candy?.images.thumbnail}" alt="${candy?.name}" class="card" title="${candy?.name}">`
 		})
 	}
+	candysInCart.forEach(candy => {
+		candy.in_cart = 0
+		candy.show = false
+		document.querySelector(`#candy-${candy.candy.id}`)?.classList.add('d-none')
+	})
+	updateCart(candysInCart)
 })

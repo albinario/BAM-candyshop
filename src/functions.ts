@@ -80,7 +80,7 @@ export const setCandyInCartListeners = (candysInCart: CandyInCart[]) => {
 // funktion för att lägga till eller ta bort scoops
 const scoop = (candy: CandyInCart, amount: number) => {
 	candy.in_cart = candy.in_cart + amount
-	candy.in_stock = candy.candy.stock_quantity - candy.in_cart
+	candy.in_stock = candy.in_stock - amount
 	const total = candy.candy.price * candy.in_cart
 	document.querySelector(`#in-cart-${candy.candy.id}`)!.innerHTML = String(candy.in_cart)
 	document.querySelector(`#total-${candy.candy.id}`)!.innerHTML = String(total)
