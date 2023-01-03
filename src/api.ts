@@ -13,7 +13,7 @@ export const getCandys = async () => {
 }
 
 export const createOrder = async (newOrder: IOrder) => {
-	const res = await fetch('https://www.bortakvall.se/api/orders', {
+	const res = await fetch(`${apiUrl}/api/orders`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',

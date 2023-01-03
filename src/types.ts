@@ -14,14 +14,7 @@ export type Candy = {
 
 export type CandyInCart = {
 	candy: Candy
-	amount: number
-}
-
-export type OrderedItem = {
-    "id": number
-    "item_price": number
-    "item_total": number
-    "order_id": number
-    "product_id": number
-    "qty": number
+	in_cart: number
+	in_stock: number
+	show: boolean
 }

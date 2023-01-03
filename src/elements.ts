@@ -1,5 +1,6 @@
 export const headerEl = document.querySelector('header')!
 export const mainEl = document.querySelector('main')!
+export const footerEl = document.querySelector('footer')!
 export const cartBtnEl = document.querySelector('#cart-btn')!
 export const scoopsInCartEls = document.querySelectorAll('.scoops-in-cart')
 export const candysInCartEl = document.querySelector('.candys-in-cart')!
@@ -17,4 +18,5 @@ export const addressEl = document.querySelector<HTMLInputElement>('#address')!
 export const cityEl = document.querySelector<HTMLInputElement>('#city')!
 export const zipEl = document.querySelector<HTMLInputElement>('#zip')!
 
-export const orderEl = document.querySelector(".order")!
+export const orderEl = document.querySelector('.order')!
+export const placeOrderEl = document.querySelector('#place-order')!
