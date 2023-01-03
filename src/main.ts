@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import './style.css'
 
-import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, countTotalPrice, updateInStock } from './functions'
+import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, countTotalPrice, updateInStock, countScoops } from './functions'
 import { apiUrl, createOrder, getCandys } from './api'
 import { Candy, CandyInCart } from './types'
 import { IOrder, IOrderedItem } from './interfaces'
@@ -85,6 +85,12 @@ cartBtnEl.addEventListener('click', () => {
 	popupEl.classList.remove('d-none')
 	headerEl.classList.remove('sticky-top')
 	footerEl.classList.remove('sticky-bottom')
+
+	if (countScoops(candysInCart) > 0) {
+		placeOrderEl.classList.remove('d-none')
+	} else {
+		placeOrderEl.classList.add('d-none')
+	}
 })
 
 popupCloseEl.addEventListener('click', () => {

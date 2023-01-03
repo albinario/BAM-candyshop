@@ -120,7 +120,7 @@ export const updateInStock = (candyId: number, inStock: number) => {
 }
 
 //funktion för att räkna alla scoops i hela carten
-const countScoops = (candysInCart: CandyInCart[]) => {
+export const countScoops = (candysInCart: CandyInCart[]) => {
 	return candysInCart.reduce((sum, a) => sum + a.in_cart, 0)
 }
 
