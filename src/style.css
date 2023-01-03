@@ -117,12 +117,7 @@ tbody {
 	font-size: 350px;
 }
 
-.order{
-	color: white;
-	overflow: hidden;
-}
-
-.order {
+.popup-content {
 	overflow: hidden;
 	color: white;
 }

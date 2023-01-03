@@ -1,5 +1,5 @@
 import { Candy, CandyInCart } from './types'
-import { candysInCartEl, scoopsInCartEls, tableContentEl, totalPriceEl } from './elements'
+import { candysInCartEl, placeOrderEl, scoopsInCartEls, tableContentEl, totalPriceEl } from './elements'
 import { apiUrl } from './api'
 
 // funktion för att lägga till candys, används endast av buy-btn och buy-view-btn
@@ -51,6 +51,7 @@ export const setCandyInCartListeners = (candysInCart: CandyInCart[]) => {
 			if (candy.in_cart > 0) {
 				document.querySelector(`#delete-${candy.candy.id}`)?.classList.add('d-none')
 				document.querySelector(`#remove-${candy.candy.id}`)?.classList.remove('d-none')
+				placeOrderEl.classList.remove('d-none')
 			}
 			if (candy.in_cart === candy.candy.stock_quantity) {
 				document.querySelector(`#add-${candy.candy.id}`)?.classList.add('d-none')
@@ -63,6 +64,9 @@ export const setCandyInCartListeners = (candysInCart: CandyInCart[]) => {
 			if (candy.in_cart === 0) {
 				document.querySelector(`#remove-${candy.candy.id}`)?.classList.add('d-none')
 				document.querySelector(`#delete-${candy.candy.id}`)?.classList.remove('d-none')
+				if (countScoops(candysInCart) === 0) {
+					placeOrderEl.classList.add('d-none')
+				}
 			}
 			if (candy.in_cart < candy.candy.stock_quantity) {
 				document.querySelector(`#max-${candy.candy.id}`)?.classList.add('d-none')

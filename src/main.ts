@@ -85,12 +85,6 @@ cartBtnEl.addEventListener('click', () => {
 	popupEl.classList.remove('d-none')
 	headerEl.classList.remove('sticky-top')
 	footerEl.classList.remove('sticky-bottom')
-
-	if (candysInCart.filter(c => c.show).length) {
-		placeOrderEl.classList.remove('d-none')
-	} else {
-		placeOrderEl.classList.add('d-none')
-	}
 })
 
 popupCloseEl.addEventListener('click', () => {
