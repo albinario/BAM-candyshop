@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import './style.css'
+import '../assets/img'
 
 import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, countTotalPrice, updateInStock, countScoops } from './functions'
 import { apiUrl, createOrder, getCandys } from './api'
@@ -142,7 +143,7 @@ const buildFunc = async () => {
 				<p>Have a great day and enjoy your candy soon!</p>
 				<div id="ordered-candys" class="img-container my-3"></div>
 				<p>❤️ All the best from the staff at</p>
-				<img src="/assets/logo-816d1812.svg" alt="BAM Candyshop">
+				<img src="logo.svg" alt="BAM Candyshop">
 				<div class="img-container my-3">
 					<img src="/assets/img/mans.jpg" alt="Måns Edenfalk" title="Måns Edenfalk" class="card">
 					<img src="/assets/img/bob.jpg" alt="Bob Oskar Kindgren" title="Bob Oskar Kindgren" class="card">
