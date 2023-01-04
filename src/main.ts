@@ -142,11 +142,11 @@ const buildFunc = async () => {
 				<p>Have a great day and enjoy your candy soon!</p>
 				<div id="ordered-candys" class="img-container my-3"></div>
 				<p>❤️ All the best from the staff at</p>
-				<img src="logo.svg" alt="BAM Candyshop">
+				<img src="/assets/logo-816d1812.svg" alt="BAM Candyshop">
 				<div class="img-container my-3">
-					<img src="/assets/img/mans_edenfalk.jpg" alt="Måns Edenfalk" title="Måns Edenfalk" class="card">
-					<img src="/assets/img/bob_oskar_kindgren.jpg" alt="Bob Oskar Kindgren" title="Bob Oskar Kindgren" class="card">
-					<img src="/assets/img/albin_lindeborg.jpg" alt="Albin Lindeborg" title="Albin Lindeborg" class="card">
+					<img src="/assets/img/mans.jpg" alt="Måns Edenfalk" title="Måns Edenfalk" class="card">
+					<img src="/assets/img/bob.jpg" alt="Bob Oskar Kindgren" title="Bob Oskar Kindgren" class="card">
+					<img src="/assets/img/albin.jpg" alt="Albin Lindeborg" title="Albin Lindeborg" class="card">
 				</div>
 			`
 			const orderedCandys: IOrderedItem[] = createdOrder.data.items
