@@ -15,6 +15,5 @@ export type Candy = {
 export type CandyInCart = {
 	candy: Candy
 	in_cart: number
-	in_stock: number
 	show: boolean
 }

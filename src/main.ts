@@ -75,7 +75,7 @@ candysArr.forEach(candy => {
 
 	const foundCandy = candysInCart.find(c => c.candy.id === candy.id)
 	if (foundCandy) {
-		updateInStock(candy.id, foundCandy.in_stock)
+		updateInStock(candy.id, foundCandy.candy.stock_quantity)
 	} else {
 		updateInStock(candy.id, candy.stock_quantity)
 	}
