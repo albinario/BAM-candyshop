@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import './style.css'
+import './assets'
 
 import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, countTotalPrice, updateInStock, countScoops } from './functions'
 import { apiUrl, createOrder, getCandys } from './api'
