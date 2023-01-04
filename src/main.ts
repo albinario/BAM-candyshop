@@ -6,7 +6,7 @@ import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, coun
 import { apiUrl, createOrder, getCandys } from './api'
 import { Candy, CandyInCart } from './types'
 import { IOrder, IOrderedItem } from './interfaces'
-import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl, footerEl, placeOrderEl, shoppingCartEl, checkBoxEl } from './elements'
+import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl, footerEl, placeOrderEl, shoppingCartEl } from './elements'
 
 const candys = await getCandys()
 export const candysArr: Candy[] = candys.data
