@@ -8,8 +8,10 @@ import { Candy, CandyInCart } from './types'
 import { IOrder, IOrderedItem } from './interfaces'
 import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl, footerEl, placeOrderEl, shoppingCartEl, checkBoxEl } from './elements'
 
-const candys = await getCandys()
-export const candysArr: Candy[] = candys.data
+getCandys().then(response => {
+	const candysArr: Candy[] = response.data
+
+
 candysArr.sort((a, b) => a.name.localeCompare(b.name))
 
 const candyInStock = candysArr.filter(candy => candy.stock_quantity > 0)
@@ -161,4 +163,4 @@ placeOrderEl.addEventListener('submit', async e => {
 		document.querySelector(`#candy-${candy.candy.id}`)?.classList.add('d-none')
 	})
 	updateCart(candysInCart)
-})
+})})
