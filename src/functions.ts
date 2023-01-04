@@ -1,5 +1,5 @@
 import { Candy, CandyInCart } from './types'
-import { candysInCartEl, scoopsInCartEls, tableContentEl, totalPriceEl } from './elements'
+import { candysInCartEl, placeOrderEl, scoopsInCartEls, tableContentEl, totalPriceEl } from './elements'
 import { apiUrl } from './api'
 
 // funktion för att lägga till candys, används endast av buy-btn och buy-view-btn
@@ -12,10 +12,11 @@ export const addToCart = (candy: Candy, candysInCart: CandyInCart[]) => {
 		document.querySelector(`#delete-${candy.id}`)?.classList.add('d-none')
 		document.querySelector(`#remove-${candy.id}`)?.classList.remove('d-none')
 	} else {
-		const newCandy: CandyInCart = {candy: candy, in_cart: 1, in_stock: candy.stock_quantity - 1, show: true}
+		const newCandy: CandyInCart = {candy: candy, in_cart: 1, show: true}
+		newCandy.candy.stock_quantity--
 		candysInCart.push(newCandy)
 		renderCandyInCart(newCandy)
-		updateInStock(newCandy.candy.id, newCandy.in_stock)
+		updateInStock(newCandy.candy.id, newCandy.candy.stock_quantity)
 		setCandyInCartListeners(candysInCart)
 	}
 	updateCart(candysInCart)
@@ -27,7 +28,7 @@ export const renderCandyInCart = (candy: CandyInCart) => {
 			<td><img src="${apiUrl}/${candy.candy.images.thumbnail}" class="card d-none d-sm-inline" alt="${candy.candy.name}"></td>
 			<td>
 				${candy.candy.name}<br>
-				<span class="in-stock-${candy.candy.id} badge bg-success d-inherit">${candy.in_stock} left in stock</span>
+				<span class="in-stock-${candy.candy.id} badge bg-success d-inherit">${candy.candy.stock_quantity} left in stock</span>
 			</td>
 			<td class="text-center text-nowrap">
 				<span id="delete-${candy.candy.id}" class="badge bg-danger ${candy.in_cart > 0 ? 'd-none' : ''}"><i class="fa-solid fa-trash-can"></i></span>
@@ -51,6 +52,7 @@ export const setCandyInCartListeners = (candysInCart: CandyInCart[]) => {
 			if (candy.in_cart > 0) {
 				document.querySelector(`#delete-${candy.candy.id}`)?.classList.add('d-none')
 				document.querySelector(`#remove-${candy.candy.id}`)?.classList.remove('d-none')
+				placeOrderEl.classList.remove('d-none')
 			}
 			if (candy.in_cart === candy.candy.stock_quantity) {
 				document.querySelector(`#add-${candy.candy.id}`)?.classList.add('d-none')
@@ -63,6 +65,9 @@ export const setCandyInCartListeners = (candysInCart: CandyInCart[]) => {
 			if (candy.in_cart === 0) {
 				document.querySelector(`#remove-${candy.candy.id}`)?.classList.add('d-none')
 				document.querySelector(`#delete-${candy.candy.id}`)?.classList.remove('d-none')
+				if (countScoops(candysInCart) === 0) {
+					placeOrderEl.classList.add('d-none')
+				}
 			}
 			if (candy.in_cart < candy.candy.stock_quantity) {
 				document.querySelector(`#max-${candy.candy.id}`)?.classList.add('d-none')
@@ -80,11 +85,11 @@ export const setCandyInCartListeners = (candysInCart: CandyInCart[]) => {
 // funktion för att lägga till eller ta bort scoops
 const scoop = (candy: CandyInCart, amount: number) => {
 	candy.in_cart = candy.in_cart + amount
-	candy.in_stock = candy.candy.stock_quantity - candy.in_cart
+	candy.candy.stock_quantity = candy.candy.stock_quantity - amount
 	const total = candy.candy.price * candy.in_cart
 	document.querySelector(`#in-cart-${candy.candy.id}`)!.innerHTML = String(candy.in_cart)
 	document.querySelector(`#total-${candy.candy.id}`)!.innerHTML = String(total)
-	updateInStock(candy.candy.id, candy.in_stock)
+	updateInStock(candy.candy.id, candy.candy.stock_quantity)
 }
 
 // funktion för att uppdatera alla element som innehåller eller är relaterat till stock-värde
@@ -116,7 +121,7 @@ export const updateInStock = (candyId: number, inStock: number) => {
 }
 
 //funktion för att räkna alla scoops i hela carten
-const countScoops = (candysInCart: CandyInCart[]) => {
+export const countScoops = (candysInCart: CandyInCart[]) => {
 	return candysInCart.reduce((sum, a) => sum + a.in_cart, 0)
 }
 
