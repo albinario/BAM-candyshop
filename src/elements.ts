@@ -9,7 +9,7 @@ export const popupCloseEl = document.querySelector('.popup-close')!
 export const tableContentEl = document.querySelector('.table-content')!
 export const candyCountEl = document.querySelector('.candy-count')!
 export const totalPriceEl = document.querySelector('#total-price')!
-export const checkBoxEl = document.querySelector('#"gridCheck"')!
+export const checkBoxEl = document.querySelector<HTMLInputElement>('#gridCheck')!
 
 export const firstNameEl = document.querySelector<HTMLInputElement>('#first-name')!
 export const lastNameEl = document.querySelector<HTMLInputElement>('#last-name')!
