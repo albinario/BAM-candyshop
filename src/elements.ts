@@ -22,3 +22,4 @@ export const zipEl = document.querySelector<HTMLInputElement>('#zip')!
 export const orderEl = document.querySelector('.order')!
 export const placeOrderEl = document.querySelector('#place-order')!
 export const shoppingCartEl = document.querySelector('#shopping-cart')!
+export const signatureEl = document.querySelector('#signature')!
