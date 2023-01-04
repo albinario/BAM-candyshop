@@ -6,7 +6,7 @@ import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, coun
 import { apiUrl, createOrder, getCandys } from './api'
 import { Candy, CandyInCart } from './types'
 import { IOrder, IOrderedItem } from './interfaces'
-import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl, footerEl, placeOrderEl, shoppingCartEl } from './elements'
+import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl, footerEl, placeOrderEl, shoppingCartEl, checkBoxEl } from './elements'
 
 const candys = await getCandys()
 export const candysArr: Candy[] = candys.data
@@ -100,6 +100,7 @@ popupCloseEl.addEventListener('click', () => {
 	placeOrderEl.classList.remove('d-none')
 	shoppingCartEl.classList.remove('d-none')
 	orderEl.classList.add('d-none')
+	// checkBoxEl.setAttribute
 })
 
 placeOrderEl.addEventListener('submit', async e => {
