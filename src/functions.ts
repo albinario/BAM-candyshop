@@ -54,7 +54,7 @@ export const setCandyInCartListeners = (candysInCart: CandyInCart[]) => {
 				document.querySelector(`#remove-${candy.candy.id}`)?.classList.remove('d-none')
 				placeOrderEl.classList.remove('d-none')
 			}
-			if (candy.in_cart === candy.candy.stock_quantity) {
+			if (candy.candy.stock_quantity === 0) {
 				document.querySelector(`#add-${candy.candy.id}`)?.classList.add('d-none')
 				document.querySelector(`#max-${candy.candy.id}`)?.classList.remove('d-none')
 			}
