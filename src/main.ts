@@ -3,7 +3,7 @@ import 'bootstrap/dist/js/bootstrap.js'
 import './style.css'
 
 import { addToCart, renderCandyInCart, updateCart, setCandyInCartListeners, countTotalPrice, updateInStock, countScoops } from './functions'
-import { apiUrl, createOrder, getCandys } from './api'
+import { imgUrl, createOrder, getCandys } from './api'
 import { Candy, CandyInCart } from './types'
 import { IOrder, IOrderedItem } from './interfaces'
 import { headerEl, mainEl, cartBtnEl, popupCloseEl, popupEl, candyCountEl, firstNameEl, lastNameEl, addressEl, zipEl, cityEl, emailEl, orderEl, footerEl, placeOrderEl, shoppingCartEl, checkBoxEl, signatureEl } from './elements'
@@ -18,7 +18,7 @@ const buildFunc = async () => {
 	mainEl.innerHTML = candysArr.map(candy => `
 		<div class="col-6 col-md-4 col-lg-3">
 			<div class="card my-2">
-				<img src="${apiUrl}/${candy.images.thumbnail}" class="card-img-top" alt="${candy.name}">
+				<img src="${imgUrl}${candy.images.thumbnail}" class="card-img-top" alt="${candy.name}">
 				<span class="in-stock-${candy.id} badge bg-success position-absolute m-2"></span>
 				<div class="card-body text-center">
 					<p class="card-title">${candy.name}</p>
@@ -41,7 +41,7 @@ const buildFunc = async () => {
 					</div>
 					<div class="modal-body">
 						<span class="in-stock-${candy.id} badge bg-success position-absolute m-1"></span>
-						<img src="${apiUrl}/${candy.images.large}" alt="${candy.name}">
+						<img src="${imgUrl}${candy.images.large}" alt="${candy.name}">
 						${candy.description}
 						<p class="fw-bold"><i class="fa-solid fa-piggy-bank"></i> ${candy.price} sek</p>
 					</div>
@@ -135,19 +135,22 @@ const buildFunc = async () => {
 				orderEl.innerHTML = `<p class="alert alert-danger mt-3">${value}</p>`
 			})
 		} else {
+			const dateStr = createdOrder.data.created_at
+			const date = new Date(dateStr)
+			const dateOnly = date.toISOString().split('T')[0]
 			orderEl.innerHTML = `
 				<i class="fa-solid fa-handshake"></i>
 				<h3>Thank you, ${createdOrder.data.customer_first_name}!</h3>
 				<p>Your order ID is <span class="text-bam ms-1 fs-2">${createdOrder.data.id}</span></p>
-				<p>Registered at <span class="text-bam">${createdOrder.data.order_date}</span></p>
+				<p>Registered at <span class="text-bam">${dateOnly}</span></p>
 				<p>We have sent an order confirmation to <span class="text-bam">${createdOrder.data.customer_email}</span></p>
 				<p>Have a great day and enjoy your candy soon!</p>
 				<div id="ordered-candys" class="img-container my-3"></div>
 			`
-			const orderedCandys: IOrderedItem[] = createdOrder.data.items
+			const orderedCandys: IOrderedItem[] = createdOrder.data.orderItems
 			orderedCandys.forEach(orderedCandy => {
 				const candy = candysArr.find(candy => candy.id === orderedCandy.product_id)
-				document.querySelector('#ordered-candys')!.innerHTML += `<img src="${apiUrl}/${candy?.images.thumbnail}" alt="${candy?.name}" class="card" title="${candy?.name}">`
+				document.querySelector('#ordered-candys')!.innerHTML += `<img src="${imgUrl}${candy?.images.thumbnail}" alt="${candy?.name}" class="card" title="${candy?.name}">`
 			})
 		}
 		candysInCart.forEach(candy => {

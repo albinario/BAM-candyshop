@@ -1,6 +1,6 @@
 import { Candy, CandyInCart } from './types'
 import { candysInCartEl, placeOrderEl, scoopsInCartEls, tableContentEl, totalPriceEl } from './elements'
-import { apiUrl } from './api'
+import { imgUrl } from './api'
 
 // funktion för att lägga till candys, används endast av buy-btn och buy-view-btn
 export const addToCart = (candy: Candy, candysInCart: CandyInCart[]) => {
@@ -25,7 +25,7 @@ export const addToCart = (candy: Candy, candysInCart: CandyInCart[]) => {
 export const renderCandyInCart = (candy: CandyInCart) => {
 	tableContentEl.innerHTML += `
 		<tr scope="row" id="candy-${candy.candy.id}" class="${candy.show ? '' : 'd-none'}">
-			<td><img src="${apiUrl}/${candy.candy.images.thumbnail}" class="card d-none d-sm-inline" alt="${candy.candy.name}"></td>
+			<td><img src="${imgUrl}${candy.candy.images.thumbnail}" class="card d-none d-sm-inline" alt="${candy.candy.name}"></td>
 			<td>
 				${candy.candy.name}<br>
 				<span class="in-stock-${candy.candy.id} badge bg-success d-inherit">${candy.candy.stock_quantity} left in stock</span>
