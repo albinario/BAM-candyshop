@@ -147,7 +147,7 @@ const buildFunc = async () => {
 				<p>Have a great day and enjoy your candy soon!</p>
 				<div id="ordered-candys" class="img-container my-3"></div>
 			`
-			const orderedCandys: IOrderedItem[] = createdOrder.data.orderItems
+			const orderedCandys: IOrderedItem[] = createdOrder.data.order_items
 			orderedCandys.forEach(orderedCandy => {
 				const candy = candysArr.find(candy => candy.id === orderedCandy.product_id)
 				document.querySelector('#ordered-candys')!.innerHTML += `<img src="${imgUrl}${candy?.images.thumbnail}" alt="${candy?.name}" class="card" title="${candy?.name}">`
