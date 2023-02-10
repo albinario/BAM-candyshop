@@ -35,7 +35,7 @@
 						<p>1. Edit your shopping cart <i class="fa-solid fa-cart-shopping"></i></p>
 						<table class="table table-sm table-dark table-striped">
 							<thead>
-								<tr>
+								<tr scope="row">
 									<th scope="col" colspan="3">
 										<span class="scoops-in-cart badge bg-warning mb-1">0</span>
 										<span class="d-none d-sm-inline">scoops </span><i class="fa-solid fa-spoon" title="Scoop"></i>
@@ -47,7 +47,15 @@
 									<th scope="col" class="text-center">Tot<span class="d-none d-sm-inline">al</span></th>
 								</tr>
 							</thead>
-							<tbody class="table-content"></tbody>
+							<tbody class="table-content">
+								<tr scope="row" class="d-none">
+									<td>img</td>
+									<td>candy name</td>
+									<td>buttons</td>
+									<td>kr</td>
+									<td>kr tot</td>
+								</tr>
+							</tbody>
 						</table>
 						<div class="text-end text-bam me-2 fs-2">
 							<span id="total-price">0</span> kr
